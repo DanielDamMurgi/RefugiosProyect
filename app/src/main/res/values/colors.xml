@@ -7,4 +7,6 @@
     <color name="blanco">#ffffff</color>
     <color name="caqui">#e0d8b0</color>
     <color name="caquiOscuro">#c9bc77</color>
+    <color name="caquiClaro">#f3f5deb3</color>
+    <color name="negro">#000000</color>
 </resources>
