@@ -23,10 +23,7 @@ public class MainActivity extends AppCompatActivity
     //ATRIBUTOS
     private Intent intent;
     private Button btLogin, btRegistrar;
-
-    MenuItem boton;
-    //private CardView cardViewLogin,cardViewRegistrar;
-
+    private View headerView;
 
     //IMPLEMENTACION
     @Override
@@ -48,7 +45,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //IMPLEMENTAR BOTONES
-        View headerView = navigationView.getHeaderView(0);
+        headerView = navigationView.getHeaderView(0);
 
         btLogin = headerView.findViewById(R.id.bt_login_DL);
         btRegistrar = headerView.findViewById(R.id.bt_registrar_DL);
@@ -124,8 +121,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
-
-        }else if(id == R.id.bt_login_DL){
 
         }
 
