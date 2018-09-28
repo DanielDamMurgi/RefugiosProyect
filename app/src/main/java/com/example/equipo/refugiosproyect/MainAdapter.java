@@ -1,6 +1,7 @@
 package com.example.equipo.refugiosproyect;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.CardView;
@@ -20,13 +21,13 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> implement
     static Context context;
     private ArrayList<Sierra> sierras;
     private ViewHolder viewHolder;
+    private Intent intent;
 
     public MainAdapter(){
 
     }
 
     public MainAdapter(Context context, ArrayList<Sierra> sierras) {
-        Log.d("dsdsdsds","sillegaaaaaaaaaaaa");
         this.context = context;
         this.sierras = new ArrayList<>();
         this.sierras = sierras;
@@ -44,6 +45,15 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> implement
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         viewHolder.textViewSierra.setText(sierras.get(position).getNombre());
         viewHolder.imageViewSierra.setImageResource(sierras.get(position).getFoto());
+
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(context, SierraActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
