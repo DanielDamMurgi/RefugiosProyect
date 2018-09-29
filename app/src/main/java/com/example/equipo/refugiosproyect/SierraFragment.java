@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 public class SierraFragment extends Fragment implements View.OnClickListener{
 
-    private CardView infoCard;
+    private CardView infoCard, refugioCard;
 
     public SierraFragment() {
         // Required empty public constructor
@@ -39,9 +39,12 @@ public class SierraFragment extends Fragment implements View.OnClickListener{
 
         switch (v.getId()){
             case R.id.cardView_infoSierra:
-                Toast.makeText(getActivity(),"llega",Toast.LENGTH_SHORT).show();
                 i = new Intent(getActivity(),InfoActivity.class);
                 startActivity(i);
+                break;
+
+            case R.id.cardView_refugioSierra:
+
                 break;
         }
     }

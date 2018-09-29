@@ -1,15 +1,31 @@
 package com.example.equipo.refugiosproyect.ClasesPrincipales;
 
 public class Sierra {
+    //ATRIBUTOS----------------------------------------------------
+    private String id;
     private String nombre;
+    private String info;
     private int foto;
 
+    //CONSTRUCTORES------------------------------------------------
     public Sierra() {
+
     }
 
-    public Sierra(String nombre, int foto) {
+    public Sierra(String id,String nombre, String info,int foto) {
+        this.id = id;
         this.nombre = nombre;
+        this.info = info;
         this.foto = foto;
+    }
+
+    //GETTERS Y SETTERS---------------------------------------------
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -18,6 +34,14 @@ public class Sierra {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     public int getFoto() {
