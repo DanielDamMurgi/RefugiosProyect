@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.equipo.refugiosproyect.ClasesPrincipales.Refugio;
+
 public class SierraFragment extends Fragment implements View.OnClickListener{
 
     private CardView infoCard, refugioCard;
@@ -28,6 +30,9 @@ public class SierraFragment extends Fragment implements View.OnClickListener{
         infoCard = view.findViewById(R.id.cardView_infoSierra);
         infoCard.setOnClickListener(this);
 
+        refugioCard = view.findViewById(R.id.cardView_refugioSierra);
+        refugioCard.setOnClickListener(this);
+
 
         return view;
     }
@@ -44,8 +49,10 @@ public class SierraFragment extends Fragment implements View.OnClickListener{
                 break;
 
             case R.id.cardView_refugioSierra:
-
+                i = new Intent(getActivity(),RefugioActivity.class);
+                startActivity(i);
                 break;
         }
+
     }
 }

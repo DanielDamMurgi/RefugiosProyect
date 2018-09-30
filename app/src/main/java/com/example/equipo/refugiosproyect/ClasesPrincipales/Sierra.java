@@ -12,7 +12,12 @@ public class Sierra {
 
     }
 
-    public Sierra(String id,String nombre, String info,int foto) {
+    public Sierra(String nombre, int foto) {
+        this.nombre = nombre;
+        this.foto = foto;
+    }
+
+    public Sierra(String id, String nombre, String info, int foto) {
         this.id = id;
         this.nombre = nombre;
         this.info = info;
