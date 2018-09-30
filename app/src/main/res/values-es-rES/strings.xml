@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RefugiosProyect</string>
+    <string name="acerca_de">Acerca de</string>
+    <string name="registrar">Registrar</string>
+    <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="email">E-mail</string>
+    <string name="clave">Contraseña</string>
+    <string name="nombre">Nombre</string>
+    <string name="repetir_clave">Repetir contraseña</string>
+</resources>

@@ -2,4 +2,10 @@
 <resources>
     <string name="app_name">RefugiosProyect</string>
     <string name="acerca_de">About</string>
+    <string name="iniciar_sesion">Log in</string>
+    <string name="registrar">Sign in</string>
+    <string name="email">E-mail</string>
+    <string name="clave">Password</string>
+    <string name="nombre">Name</string>
+    <string name="repetir_clave">Repeat password</string>
 </resources>

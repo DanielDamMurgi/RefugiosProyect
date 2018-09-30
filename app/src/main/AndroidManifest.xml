@@ -31,7 +31,9 @@
         <activity
             android:name=".RefugioActivity"
             android:theme="@style/AppThemeNoActionBar" />
-        <activity android:name=".PanelRefugioActivity"></activity>
+        <activity android:name=".PanelRefugioActivity" />
+        <activity android:name=".RegistroActivity"
+            android:theme="@style/AppThemeNoActionBar"></activity>
     </application>
 
 </manifest>
