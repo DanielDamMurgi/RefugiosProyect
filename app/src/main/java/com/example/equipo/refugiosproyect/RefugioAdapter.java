@@ -57,6 +57,14 @@ class RefugioAdapter extends RecyclerView.Adapter<RefugioAdapter.ViewHolder> imp
         }
 
         viewHolder.textViewSit.setText(situacion);
+
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(context,PanelRefugioActivity.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
