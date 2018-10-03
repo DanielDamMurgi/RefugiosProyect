@@ -1,38 +1,83 @@
 package com.example.equipo.refugiosproyect;
 
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 
-public class PanelRefugioActivity extends AppCompatActivity {
+import com.example.equipo.refugiosproyect.ClasesPrincipales.RutasFragment;
 
-    private Toolbar toolbar;
-    private ImageView imagen;
-    private static final String EXTRA_IMAGE = "com.example.equipo.refugiosproyect.extraimage";
-    private CollapsingToolbarLayout collapsingToolbarLayout;
+import java.util.ArrayList;
+import java.util.List;
+
+public class PanelRefugioActivity extends AppCompatActivity{
+
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_panel_refugio);
 
-        ViewCompat.setTransitionName(findViewById(R.id.appBarLayout_refugios),EXTRA_IMAGE);
-        supportPostponeEnterTransition();
-
-        toolbar = findViewById(R.id.toolbar_refugios);
+        Toolbar toolbar = findViewById(R.id.toolbar_panelRefugio);
         setSupportActionBar(toolbar);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        collapsingToolbarLayout = findViewById(R.id.collapsingToolbar_refugios);
-        collapsingToolbarLayout.setTitle("La Polarda");
-        collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.blanco));
+        viewPager = findViewById(R.id.viewpager_panelRefugio);
+        añadirTabs(viewPager);
 
+        tabLayout = findViewById(R.id.tabs_panelRefugio);
+        tabLayout.setupWithViewPager(viewPager);
 
-        imagen = findViewById(R.id.imageViewToolbar_refugios);
-        imagen.setImageResource(R.drawable.refugio_polarda);
+    }
+
+    private void añadirTabs(ViewPager viewPager){
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.añadirFragmento(new InfoRefugioFragment(), "Información");
+        adapter.añadirFragmento(new RutasFragment(),"Rutas");
+        adapter.añadirFragmento(new FotosRefugioFragment(), "Fotos");
+        viewPager.setAdapter(adapter);
+    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+
+        private final List<Fragment> fragmentList = new ArrayList<>();
+        private final List<String> fragmentTittleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager fragmentManager){
+            super(fragmentManager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragmentList.size();
+        }
+
+        public void añadirFragmento(Fragment fragment, String titulo){
+            fragmentList.add(fragment);
+            fragmentTittleList.add(titulo);
+        }
+
+        public CharSequence getPageTitle(int position){
+            return fragmentTittleList.get(position);
+        }
+
     }
 
 }

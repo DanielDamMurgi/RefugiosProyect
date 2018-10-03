@@ -27,11 +27,13 @@
             android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".InfoActivity"
+            android:parentActivityName=".SierraActivity"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".RefugioActivity"
             android:theme="@style/AppThemeNoActionBar" />
         <activity android:name=".PanelRefugioActivity"
+            android:parentActivityName=".RefugioActivity"
             android:theme="@style/AppThemeNoActionBar"/>
         <activity android:name=".RegistroActivity"
             android:theme="@style/AppThemeNoActionBar"></activity>
