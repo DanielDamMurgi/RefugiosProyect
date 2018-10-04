@@ -63,7 +63,7 @@ public class SierraFragment extends Fragment implements View.OnClickListener{
                 break;
 
             case R.id.cardView_mapaSierra:
-                i = new Intent(getActivity(),MapaBaseActivity.class);
+                i = new Intent(getActivity(),MapsActivity.class);
                 startActivity(i);
                 break;
             default:
