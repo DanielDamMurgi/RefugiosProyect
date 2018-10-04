@@ -22,6 +22,6 @@
         android:layout_marginBottom="20dp"
         android:clickable="true"
         app:backgroundTint="@color/caquiOscuro"
-        app:srcCompat="@mipmap/ic_montana" />
+        app:srcCompat="@drawable/ic_montana" />
 
 </RelativeLayout>
