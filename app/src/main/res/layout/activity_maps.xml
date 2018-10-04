@@ -12,8 +12,8 @@
         android:layout_height="match_parent"
         class="com.google.android.gms.maps.SupportMapFragment"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton_montana"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -21,6 +21,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:clickable="true"
-        app:srcCompat="@mipmap/ic_tiempo" />
+        app:backgroundTint="@color/caquiOscuro"
+        app:srcCompat="@mipmap/ic_montana" />
 
 </RelativeLayout>

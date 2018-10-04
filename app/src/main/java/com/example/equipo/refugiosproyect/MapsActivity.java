@@ -9,6 +9,7 @@ import android.location.LocationManager;
 import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
@@ -42,11 +43,6 @@ public class MapsActivity extends FragmentActivity implements
         OnMapReadyCallback, GoogleMap.OnMapClickListener, LocationListener {
 
     //ATRIBUTOS
-    private static final int PLACE_PICKER_REQUEST = 1;
-    private static final int PERMISSIONS_REQUEST_FINE_LOCATION = 111;
-
-    public static final String TAG = MapsActivity.class.getSimpleName();
-
     private LatLng sierraCoor, puntoPulsado;
     private LocationManager manejador;
     private GoogleApiClient googleApiClient;
@@ -55,6 +51,7 @@ public class MapsActivity extends FragmentActivity implements
     private GoogleMap mapa;
     private LatLng ubeire = new LatLng(37.1185152,-2.9021601);
     private boolean primera = true;
+    private FloatingActionButton floatingActionButton;
 
 
 
@@ -65,7 +62,7 @@ public class MapsActivity extends FragmentActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        //Permisos
+        floatingActionButton = findViewById(R.id.floatingActionButton_montana);
 
         sierraCoor = new LatLng(37.074253, -3.1327653);
 
@@ -92,6 +89,15 @@ public class MapsActivity extends FragmentActivity implements
                 .addApi(Places.GEO_DATA_API)
                 .enableAutoManage(this,this)
                 .build();
+
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mapa.moveCamera(CameraUpdateFactory.newLatLng(sierraCoor));
+                mapa.animateCamera(CameraUpdateFactory.newLatLngZoom(sierraCoor, 10));
+            }
+        });
     }
 
     @Override
@@ -153,20 +159,20 @@ public class MapsActivity extends FragmentActivity implements
         mapa.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
         añadirMarcadores(primera);
 
-        primera = false;
+        //primera = false;
 
-        mapa.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng punto) {
-                mapa.clear();
-                añadirMarcadores(primera);
-                mapa.addMarker(new MarkerOptions().position(punto)
-                        .icon(BitmapDescriptorFactory
-                                .defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
-
-                puntoPulsado = punto;
-            }
-        });
+//        mapa.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+//            @Override
+//            public void onMapClick(LatLng punto) {
+//                mapa.clear();
+//                añadirMarcadores(primera);
+//                mapa.addMarker(new MarkerOptions().position(punto)
+//                        .icon(BitmapDescriptorFactory
+//                                .defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+//
+//                puntoPulsado = punto;
+//            }
+//        });
 
     }
 
@@ -179,11 +185,7 @@ public class MapsActivity extends FragmentActivity implements
                         .fromResource(android.R.drawable.ic_menu_compass))
                 .anchor(0.5f, 0.5f));
 
-
-
-        //mapa.setOnMapClickListener(this);
-
-        mapa.addMarker(new MarkerOptions().position(sierraCoor).title("Sierra Nevada"));
+        mapa.addMarker(new MarkerOptions().position(sierraCoor).title("Sierra Nevada")).showInfoWindow();
 
         if (primera == true) {
             mapa.moveCamera(CameraUpdateFactory.newLatLng(sierraCoor));
