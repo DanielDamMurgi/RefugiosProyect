@@ -185,7 +185,7 @@ public class MapsActivity extends FragmentActivity implements
                         .fromResource(android.R.drawable.ic_menu_compass))
                 .anchor(0.5f, 0.5f));
 
-        mapa.addMarker(new MarkerOptions().position(sierraCoor).title("Sierra Nevada")).showInfoWindow();
+        mapa.addMarker(new MarkerOptions().position(sierraCoor).title("Sierra Nevada"));
 
         if (primera == true) {
             mapa.moveCamera(CameraUpdateFactory.newLatLng(sierraCoor));
