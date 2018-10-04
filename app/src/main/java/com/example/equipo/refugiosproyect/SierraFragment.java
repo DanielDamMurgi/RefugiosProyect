@@ -15,7 +15,7 @@ import com.example.equipo.refugiosproyect.ClasesPrincipales.Refugio;
 
 public class SierraFragment extends Fragment implements View.OnClickListener{
 
-    private CardView infoCard, refugioCard;
+    private CardView infoCard, refugioCard, fotosCard, mapaCard;
 
     public SierraFragment() {
         // Required empty public constructor
@@ -33,6 +33,12 @@ public class SierraFragment extends Fragment implements View.OnClickListener{
         refugioCard = view.findViewById(R.id.cardView_refugioSierra);
         refugioCard.setOnClickListener(this);
 
+        fotosCard = view.findViewById(R.id.cardView_fotosSierras);
+        fotosCard.setOnClickListener(this);
+
+        mapaCard = view.findViewById(R.id.cardView_mapaSierra);
+        mapaCard.setOnClickListener(this);
+
 
         return view;
     }
@@ -40,7 +46,6 @@ public class SierraFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         Intent i;
-
 
         switch (v.getId()){
             case R.id.cardView_infoSierra:
@@ -51,6 +56,18 @@ public class SierraFragment extends Fragment implements View.OnClickListener{
             case R.id.cardView_refugioSierra:
                 i = new Intent(getActivity(),RefugioActivity.class);
                 startActivity(i);
+                break;
+
+            case R.id.cardView_fotosSierras:
+
+                break;
+
+            case R.id.cardView_mapaSierra:
+                i = new Intent(getActivity(),MapaBaseActivity.class);
+                startActivity(i);
+                break;
+            default:
+
                 break;
         }
 
