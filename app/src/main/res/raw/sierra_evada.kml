@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>sierra nevada</name>
+    <description/>
+    <Style id="line-FFEA00-4100-nodesc-normal">
+      <LineStyle>
+        <color>ff0080ff</color>
+        <width>4.1</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="line-FFEA00-4100-nodesc-highlight">
+      <LineStyle>
+        <color>ff0080ff</color>
+        <width>6.15</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="line-FFEA00-4100-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-FFEA00-4100-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-FFEA00-4100-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Folder>
+      <name>Capa sin nombre</name>
+      <Placemark>
+        <name>Línea 1</name>
+        <styleUrl>#line-FFEA00-4100-nodesc</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            -2.9016644,37.1187362,0
+            -2.9018253,37.1203403,0
+            -2.9017985,37.1204173,0
+            -2.9017073,37.1205199,0
+            -2.9016108,37.120614,0
+            -2.9015048,37.1206493,0
+            -2.901301,37.1206996,0
+            -2.9010649,37.1207862,0
+            -2.9009228,37.1209006,0
+            -2.9008343,37.1209787,0
+            -2.9008276,37.1210279,0
+            -2.9008597,37.1210749,0
+            -2.900908,37.1210931,0
+            -2.9010703,37.1211476,0
+            -2.9011521,37.1211979,0
+            -2.9012487,37.1212481,0
+            -2.9013036,37.1212845,0
+            -2.9014337,37.1213562,0
+            -2.9015437,37.1213914,0
+            -2.9016483,37.1214235,0
+            -2.9018052,37.1214524,0
+            -2.9018736,37.1214588,0
+            -2.9021754,37.1215326,0
+            -2.9023256,37.1215732,0
+            -2.9024074,37.1216192,0
+            -2.9024422,37.1217026,0
+            -2.9024463,37.1217486,0
+            -2.9024329,37.1218063,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

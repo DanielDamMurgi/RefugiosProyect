@@ -31,18 +31,18 @@
             android:name=".LoginActivity"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
-            android:name=".SierraActivity"
+            android:name=".sierras.SierraActivity"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
-            android:name=".InfoActivity"
-            android:parentActivityName=".SierraActivity"
+            android:name=".sierras.InfoActivity"
+            android:parentActivityName=".sierras.SierraActivity"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
-            android:name=".RefugioActivity"
+            android:name=".refugios.RefugioActivity"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
-            android:name=".PanelRefugioActivity"
-            android:parentActivityName=".RefugioActivity"
+            android:name=".refugios.PanelRefugioActivity"
+            android:parentActivityName=".refugios.RefugioActivity"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".RegistroActivity"
@@ -60,12 +60,15 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".sierras.MapsActivity"
             android:theme="@style/AppThemeNoActionBar" />
-        <activity android:name=".FotosSierraActivity"
-            android:theme="@style/AppThemeNoActionBar"/>
-        <activity android:name=".ImagenDetalleActivity"
-            android:theme="@style/AppThemeNoActionBar"></activity>
+        <activity
+            android:name=".sierras.FotosSierraActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".ImagenDetalleActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity android:name=".refugios.MapaRutasActivity"></activity>
     </application>
 
 </manifest>
