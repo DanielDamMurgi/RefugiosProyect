@@ -6,6 +6,8 @@ public class Sierra {
     private String nombre;
     private String info;
     private int foto;
+    private String latutud;
+    private String longitud;
 
     //CONSTRUCTORES------------------------------------------------
     public Sierra() {
@@ -55,5 +57,21 @@ public class Sierra {
 
     public void setFoto(int foto) {
         this.foto = foto;
+    }
+
+    public String getLatutud() {
+        return latutud;
+    }
+
+    public void setLatutud(String latutud) {
+        this.latutud = latutud;
+    }
+
+    public String getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(String longitud) {
+        this.longitud = longitud;
     }
 }

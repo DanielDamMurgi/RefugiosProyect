@@ -3,19 +3,19 @@ package com.example.equipo.refugiosproyect.ClasesPrincipales;
 public class Usuario {
     //ATRIBUTOS-----------------------------------------------------------
     private String id;
-    private String nombre;
     private String email;
-    private String contraseña;
+    private String nombre;
+    private String clave;
 
     //CONSTRUCTORES-------------------------------------------------------
     public Usuario() {
     }
 
-    public Usuario(String id, String nombre, String email, String contraseña) {
+    public Usuario(String id, String nombre, String email, String clave) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
-        this.contraseña = contraseña;
+        this.clave = clave;
     }
 
     //GETTERS Y SETTERS------------------------------------------------------
@@ -43,11 +43,11 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getClave() {
+        return clave;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setClave(String clave) {
+        this.clave = clave;
     }
 }

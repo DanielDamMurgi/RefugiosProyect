@@ -19,7 +19,7 @@
         android:drawableLeft="@drawable/ic_email_black_24dp"
         android:ems="10"
         android:hint="@string/email"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/editText_nombreReg"
         app:layout_constraintEnd_toEndOf="@+id/editText_nombreReg"
         app:layout_constraintStart_toStartOf="@+id/editText_nombreReg" />
@@ -54,7 +54,7 @@
         android:drawableLeft="@drawable/ic_pass_black_24dp"
         android:ems="10"
         android:hint="@string/clave"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +72,7 @@
         android:drawableLeft="@drawable/ic_pass_black_24dp"
         android:ems="10"
         android:hint="@string/repetir_clave"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="@+id/editText_claveReg"
         app:layout_constraintStart_toStartOf="@+id/editText_claveReg"
         app:layout_constraintTop_toBottomOf="@+id/editText_claveReg" />
