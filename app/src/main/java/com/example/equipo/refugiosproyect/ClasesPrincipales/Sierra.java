@@ -1,11 +1,13 @@
 package com.example.equipo.refugiosproyect.ClasesPrincipales;
 
-public class Sierra {
+import java.io.Serializable;
+
+public class Sierra implements Serializable {
     //ATRIBUTOS----------------------------------------------------
-    private String id;
+    private int id;
     private String nombre;
     private String info;
-    private int foto;
+    private String foto;
     private String latutud;
     private String longitud;
 
@@ -14,24 +16,34 @@ public class Sierra {
 
     }
 
-    public Sierra(String nombre, int foto) {
+    public Sierra(String nombre, String foto) {
         this.nombre = nombre;
         this.foto = foto;
     }
 
-    public Sierra(String id, String nombre, String info, int foto) {
+    public Sierra(int id, String nombre, String info, String foto) {
         this.id = id;
         this.nombre = nombre;
         this.info = info;
         this.foto = foto;
     }
 
+    public Sierra(int id, String nombre, String info, String foto, String latutud, String longitud) {
+        this.id = id;
+        this.nombre = nombre;
+        this.info = info;
+        this.foto = foto;
+        this.latutud = latutud;
+        this.longitud = longitud;
+    }
+
     //GETTERS Y SETTERS---------------------------------------------
-    public String getId() {
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -51,11 +63,11 @@ public class Sierra {
         this.info = info;
     }
 
-    public int getFoto() {
+    public String getFoto() {
         return foto;
     }
 
-    public void setFoto(int foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 

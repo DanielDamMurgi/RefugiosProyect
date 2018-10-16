@@ -8,4 +8,8 @@
     <string name="clave">Contraseña</string>
     <string name="nombre">Nombre</string>
     <string name="repetir_clave">Repetir contraseña</string>
+    <string name="entrar">Entrar</string>
+    <string name="cerrar_sesion">Cerrar sesión</string>
+    <string name="perfil">Perfil</string>
+    <string name="inicie_sesion">Inicie sesión</string>
 </resources>

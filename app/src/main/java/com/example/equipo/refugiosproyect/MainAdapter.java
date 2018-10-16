@@ -13,7 +13,9 @@ import android.widget.TextView;
 
 import com.example.equipo.refugiosproyect.ClasesPrincipales.Sierra;
 import com.example.equipo.refugiosproyect.sierras.SierraActivity;
+import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> implements View.OnClickListener {
@@ -21,6 +23,7 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> implement
     private ArrayList<Sierra> sierras;
     private ViewHolder viewHolder;
     private Intent intent;
+    private Sierra sierra;
 
     public MainAdapter(){
 
@@ -41,14 +44,20 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> implement
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         viewHolder.textViewSierra.setText(sierras.get(position).getNombre());
-        viewHolder.imageViewSierra.setImageResource(sierras.get(position).getFoto());
+        Picasso.with(context).load(sierras.get(position).getFoto().replaceAll("file/d/","uc?export=download&id=")
+                .replace("/view","")).into(viewHolder.imageViewSierra);
+        //viewHolder.imageViewSierra.setImageResource(sierras.get(position).getFoto());
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 intent = new Intent(context, SierraActivity.class);
+                sierra = new Sierra(sierras.get(position).getId(),sierras.get(position).getNombre(),
+                        sierras.get(position).getInfo(),sierras.get(position).getFoto(),sierras.get(position).getLatutud(),
+                        sierras.get(position).getLongitud());
+                intent.putExtra("sierra", sierra);
                 context.startActivity(intent);
             }
         });

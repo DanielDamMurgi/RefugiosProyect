@@ -78,18 +78,21 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
 
         if (clave1.length() > 0) {
             if (clave1.length() < 9) {
-                Toast.makeText(this, "La contraseña debe de tener mínimo 9 caracteres",Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, "La contraseña debe de tener mínimo 9 caracteres",Toast.LENGTH_LONG).show();
+                etClave1.setError("La contraseña debe de tener mínimo 9 caracteres");
                 return false;
             } else {
                 if (clave1.equals(clave2)) {
                     return true;
                 } else {
-                    Toast.makeText(this,"Las contraseñas no coinciden",Toast.LENGTH_LONG).show();
+                    //Toast.makeText(this,"Las contraseñas no coinciden",Toast.LENGTH_LONG).show();
+                    etClave1.setError("Las contraseñas no coinciden");
                     return false;
                 }
             }
         } else {
-            Toast.makeText(this, "Inserta la contraseña",Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "Inserta la contraseña",Toast.LENGTH_LONG).show();
+            etClave1.setError("Inserta la contraseña");
             return false;
         }
 
@@ -104,6 +107,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                     etCorreo.requestFocus();
                     break;
                 } else if (!validarNombre(etNombre.getText().toString().trim())) {
+                    etNombre.setError("Inserta el nombre");
                     etNombre.requestFocus();
                     break;
                 } else if (!validarContraseña()) {

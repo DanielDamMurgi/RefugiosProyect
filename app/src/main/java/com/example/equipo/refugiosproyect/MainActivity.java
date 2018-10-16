@@ -1,7 +1,9 @@
 package com.example.equipo.refugiosproyect;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,16 +19,30 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.equipo.refugiosproyect.ClasesPrincipales.BBDD;
+import com.example.equipo.refugiosproyect.ClasesPrincipales.Usuario;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     //ATRIBUTOS
     private static final int PERMISSIONS_REQUEST_FINE_LOCATION = 111;
 
-    private Intent intent;
-    private Button btLogin, btRegistrar;
+    public static ArrayList<Usuario> usuario;
+    private static Intent intent;
+    private static Button btLogin, btRegistrar;
     private View headerView;
+    private static TextView tvNombreUsu;
+
 
     //IMPLEMENTACION
     @Override
@@ -37,6 +53,8 @@ public class MainActivity extends AppCompatActivity
         ActivityCompat.requestPermissions(MainActivity.this,
                 new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                 PERMISSIONS_REQUEST_FINE_LOCATION);
+
+        usuario = new ArrayList<>();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -56,22 +74,50 @@ public class MainActivity extends AppCompatActivity
 
         btLogin = headerView.findViewById(R.id.bt_login_DL);
         btRegistrar = headerView.findViewById(R.id.bt_registrar_DL);
+        tvNombreUsu = headerView.findViewById(R.id.tvNombreUsu);
 
-        btLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(getBaseContext(),LoginActivity.class);
-                startActivity(intent);
-            }
-        });
+        ActualizarEstado(LoginActivity.isLogin(),getApplicationContext());
 
-        btRegistrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(getApplicationContext(),RegistroActivity.class);
-                startActivity(intent);
-            }
-        });
+    }
+
+    public static void ActualizarEstado(boolean login, final Context context){
+        if (login){
+            tvNombreUsu.setText(usuario.get(0).getNombre());
+            btLogin.setText(R.string.perfil);
+            btRegistrar.setText(R.string.cerrar_sesion);
+
+            btRegistrar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    usuario.clear();
+                    LoginActivity.setLogin(false);
+
+                    ActualizarEstado(LoginActivity.isLogin(),context);
+
+                }
+            });
+        }
+        else{
+            tvNombreUsu.setText(R.string.inicie_sesion);
+            btLogin.setText(R.string.iniciar_sesion);
+            btRegistrar.setText(R.string.registrar);
+
+            btLogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context,LoginActivity.class);
+                    context.startActivity(intent);
+                }
+            });
+
+            btRegistrar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    intent = new Intent(context,RegistroActivity.class);
+                    context.startActivity(intent);
+                }
+            });
+        }
     }
 
     @Override
@@ -135,6 +181,8 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 
 
 }//FIN CLASE PRINCIPAL

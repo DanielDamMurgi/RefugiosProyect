@@ -20,6 +20,10 @@
     <string name="nombre">Nombre</string>
     <string name="repetir_clave">Repetir Contraseña</string>
     <string name="title_activity_maps">Map</string>
+    <string name="entrar">entrar</string>
+    <string name="cerrar_sesion">Cerrar sesión</string>
+    <string name="perfil">Perfil</string>
+    <string name="inicie_sesion">Inicie sesión</string>
 
 
 </resources>

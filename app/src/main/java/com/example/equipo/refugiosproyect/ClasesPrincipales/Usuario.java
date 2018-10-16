@@ -2,7 +2,7 @@ package com.example.equipo.refugiosproyect.ClasesPrincipales;
 
 public class Usuario {
     //ATRIBUTOS-----------------------------------------------------------
-    private String id;
+    private int id;
     private String email;
     private String nombre;
     private String clave;
@@ -11,7 +11,7 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String id, String nombre, String email, String clave) {
+    public Usuario(int id,String email, String nombre , String clave) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
@@ -19,11 +19,11 @@ public class Usuario {
     }
 
     //GETTERS Y SETTERS------------------------------------------------------
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
