@@ -70,6 +70,9 @@ public class SierraFragment extends Fragment implements View.OnClickListener{
 
             case R.id.cardView_mapaSierra:
                 i = new Intent(getActivity(),MapsActivity.class);
+                i.putExtra("latitudSierra",sierra.getLatutud());
+                i.putExtra("longitudSierra",sierra.getLongitud());
+                i.putExtra("nombreSierra",sierra.getNombre());
                 startActivity(i);
                 break;
             default:

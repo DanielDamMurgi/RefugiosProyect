@@ -39,7 +39,7 @@ import java.io.IOException;
 public class MapsActivity extends FragmentActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        OnMapReadyCallback, GoogleMap.OnMapClickListener, LocationListener {
+        OnMapReadyCallback, LocationListener {
 
     //ATRIBUTOS
     private LatLng sierraCoor, puntoPulsado;
@@ -51,6 +51,8 @@ public class MapsActivity extends FragmentActivity implements
     private LatLng ubeire = new LatLng(37.1185152, -2.9021601);
     private boolean primera = true;
     private FloatingActionButton floatingActionButton;
+    private String lat,lon,nombreSierra;
+    private double longitud,latitud;
 
     //IMPLEMENTACION
 
@@ -61,7 +63,13 @@ public class MapsActivity extends FragmentActivity implements
 
         floatingActionButton = findViewById(R.id.floatingActionButton_montana);
 
-        sierraCoor = new LatLng(37.074253, -3.1327653);
+        lat = getIntent().getExtras().getString("latitudSierra");
+        latitud = Double.parseDouble(lat);
+        lon = getIntent().getExtras().getString("longitudSierra");
+        longitud = Double.parseDouble(lon);
+        nombreSierra = getIntent().getExtras().getString("nombreSierra");
+
+        sierraCoor = new LatLng(latitud, longitud);
 
         manejador = (LocationManager) getSystemService(LOCATION_SERVICE);
 
@@ -83,8 +91,7 @@ public class MapsActivity extends FragmentActivity implements
                 .addOnConnectionFailedListener(this)
                 //AÑADIMOS LAS APIS QUE NOS INTERESAN
                 .addApi(LocationServices.API)
-                .addApi(Places.GEO_DATA_API)
-                .enableAutoManage(this, this)
+                .enableAutoManage(this,0, this)
                 .build();
 
 
@@ -95,6 +102,23 @@ public class MapsActivity extends FragmentActivity implements
                 mapa.animateCamera(CameraUpdateFactory.newLatLngZoom(sierraCoor, 10));
             }
         });
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (googleApiClient !=null){
+            googleApiClient.connect();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        if (googleApiClient != null && googleApiClient.isConnected()){
+            googleApiClient.disconnect();
+        }
+        super.onStop();
     }
 
     @Override
@@ -133,11 +157,6 @@ public class MapsActivity extends FragmentActivity implements
     }
 
     @Override
-    public void onMapClick(LatLng punto) {
-
-    }
-
-    @Override
     public void onMapReady(GoogleMap googleMap) {
         mapa = googleMap;
 
@@ -153,7 +172,7 @@ public class MapsActivity extends FragmentActivity implements
         }
 
         manejador.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2000000, 200, this);
-        mapa.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+        mapa.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         try {
             añadirMarcadores(primera);
         } catch (IOException e) {
@@ -190,7 +209,7 @@ public class MapsActivity extends FragmentActivity implements
 
         marker.showInfoWindow();
 
-        mapa.addMarker(new MarkerOptions().position(sierraCoor).title("Sierra Nevada"));
+        mapa.addMarker(new MarkerOptions().position(sierraCoor).title(nombreSierra));
 
 
         if (primera == true) {
@@ -198,28 +217,6 @@ public class MapsActivity extends FragmentActivity implements
             mapa.animateCamera(CameraUpdateFactory.newLatLngZoom(sierraCoor, 10));
         }
 
-
-        /*Polyline polyline = mapa.addPolyline(new PolylineOptions().add(
-                new LatLng(37.11853237153362, -2.9014956951141353),
-                new LatLng(37.118857462868064, -2.901656627655029),
-        new LatLng(37.119109835441535, -2.9017102718353267),
-                new LatLng(37.1196573527084, -2.901726365089416),
-                new LatLng(37.12001665876282, -2.901758551597595)));*/
-
-
-        /*PolylineOptions lineas = new PolylineOptions()
-        .add(new LatLng(37.11853237153362, -2.9014956951141353))
-                .add(new LatLng(37.118857462868064, -2.901656627655029))
-                .add(new LatLng(37.119109835441535, -2.9017102718353267))
-                .add(new LatLng(37.1196573527084, -2.901726365089416))
-                .add(new LatLng(37.12001665876282, -2.901758551597595));
-        lineas.width(3);
-        lineas.color(Color.YELLOW);
-        mapa.addPolyline(lineas);*/
-
-
-       // KmlLayer layer = new KmlLayer(mapa,R.raw.sierra_evada,getApplicationContext());
-       // layer.addLayerToMap();
     }
 
 }
