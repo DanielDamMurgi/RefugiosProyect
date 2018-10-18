@@ -46,9 +46,10 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> implement
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         viewHolder.textViewSierra.setText(sierras.get(position).getNombre());
-        Picasso.with(context).load(sierras.get(position).getFoto().replaceAll("file/d/","uc?export=download&id=")
-                .replace("/view","")).into(viewHolder.imageViewSierra);
-        //viewHolder.imageViewSierra.setImageResource(sierras.get(position).getFoto());
+//        Picasso.with(context).load(sierras.get(position).getFoto().replaceAll("file/d/","uc?export=download&id=")
+////                .replace("/view","").trim()).into(viewHolder.imageViewSierra);
+
+        Picasso.with(context).load(sierras.get(position).getFoto().trim()).into(viewHolder.imageViewSierra);
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

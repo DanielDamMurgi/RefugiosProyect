@@ -6,27 +6,36 @@ import android.os.Parcelable;
 public class Imagen implements Parcelable {
 
     //ATRIBUTOS-------------------------------------------------------------
-    private String id_foto;
+    private int id_foto;
+    private int id;
     private String url;
 
     //CONSTRUCTORES----------------------------------------------------------
     public Imagen() {
     }
 
-    public Imagen(String id_foto, String url) {
+    public Imagen(int id_foto, int id, String url) {
         this.id_foto = id_foto;
+        this.id = id;
         this.url = url;
     }
 
     //GETTERS Y SETTERS------------------------------------------------------
 
-
-    public String getId_foto() {
+    public int getId_foto() {
         return id_foto;
     }
 
-    public void setId_foto(String id_foto) {
+    public void setId_foto(int id_foto) {
         this.id_foto = id_foto;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUrl() {
@@ -38,28 +47,29 @@ public class Imagen implements Parcelable {
     }
 
 
-
     //IMPLEMENTACION-----------------------------------------------------------
 
-    public static Imagen[] getImagenes() {
-        return new Imagen[]{
-                new Imagen("1","http://i.imgur.com/zuG2bGQ.jpg"),
-                new Imagen("2","http://i.imgur.com/ovr0NAF.jpg"),
-                new Imagen("3","http://i.imgur.com/n6RfJX2.jpg"),
-                new Imagen("4","http://i.imgur.com/qpr5LR2.jpg"),
-                new Imagen("5","http://i.imgur.com/pSHXfu5.jpg"),
-                new Imagen("6","http://i.imgur.com/3wQcZeY.jpg"),
-        };
-    }
+//    public static Imagen[] getImagenes() {
+//        return new Imagen[]{
+//                new Imagen("1","http://i.imgur.com/zuG2bGQ.jpg"),
+//                new Imagen("2","http://i.imgur.com/ovr0NAF.jpg"),
+//                new Imagen("3","http://i.imgur.com/n6RfJX2.jpg"),
+//                new Imagen("4","http://i.imgur.com/qpr5LR2.jpg"),
+//                new Imagen("5","http://i.imgur.com/pSHXfu5.jpg"),
+//                new Imagen("6","http://i.imgur.com/3wQcZeY.jpg"),
+//        };
+//    }
 
     protected Imagen(Parcel in) {
-        id_foto = in.readString();
+        id_foto = in.readInt();
+        id = in.readInt();
         url = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id_foto);
+        dest.writeInt(id_foto);
+        dest.writeInt(id);
         dest.writeString(url);
     }
 

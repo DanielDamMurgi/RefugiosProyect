@@ -24,7 +24,7 @@ public class ImagenDetalleActivity extends AppCompatActivity {
         Glide.with(this)
                 .load(imagen.getUrl())
                 .asBitmap()
-                .error(R.drawable.ic_account_circle_black_24dp)
+                .error(R.drawable.ic_foto)
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(imageView);
     }

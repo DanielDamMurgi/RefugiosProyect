@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">RefugiosProyect</string>
+    <string name="app_name">Info Refuge</string>
     <string name="acerca_de">About</string>
     <string name="iniciar_sesion">Log in</string>
     <string name="registrar">Sign in</string>

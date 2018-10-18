@@ -65,6 +65,7 @@ public class SierraFragment extends Fragment implements View.OnClickListener{
 
             case R.id.cardView_fotosSierras:
                 i = new Intent(getActivity(), FotosSierraActivity.class);
+                i.putExtra("idSierra",sierra.getId());
                 startActivity(i);
                 break;
 

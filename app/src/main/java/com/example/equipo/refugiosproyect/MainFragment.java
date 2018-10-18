@@ -44,7 +44,7 @@ public class MainFragment extends Fragment {
 
         if (sierras.isEmpty()){
             progressDialog.show();
-            String consulta = "select distinct * from sierra";
+            String consulta = "select * from sierra";
             new CargarSierras(consulta,progressDialog).execute();
             actualizacionSierra = new ActualizacionSierra();
             actualizacionSierra.execute();

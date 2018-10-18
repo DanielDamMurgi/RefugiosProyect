@@ -1,6 +1,6 @@
 <resources>
     <!-- Genericos -->
-    <string name="app_name">RefugiosProyect</string>
+    <string name="app_name">Info Refugios</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>

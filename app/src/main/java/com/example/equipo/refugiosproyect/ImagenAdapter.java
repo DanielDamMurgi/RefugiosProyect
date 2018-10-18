@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +12,16 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.equipo.refugiosproyect.ClasesPrincipales.Imagen;
+
+import java.util.ArrayList;
 
 public class ImagenAdapter extends RecyclerView.Adapter<ImagenAdapter.ViewHolder> implements View.OnClickListener {
     private Context context;
-    private Imagen[] imagenes;
+    private ArrayList<Imagen> imagenes;
 
-    public ImagenAdapter(Context context, Imagen[] imagenes) {
+    public ImagenAdapter(Context context, ArrayList<Imagen> imagenes) {
         this.context=context;
         this.imagenes = imagenes;
     }
@@ -33,18 +37,16 @@ public class ImagenAdapter extends RecyclerView.Adapter<ImagenAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        Imagen imagen = imagenes[position];
-        ImageView imageView = holder.imageView;
 
         Glide.with(context)
-                .load(imagen.getUrl())
-                .placeholder(R.drawable.ic_account_circle_white_24dp)
-                .into(imageView);
+                .load(imagenes.get(position).getUrl().trim())
+                .placeholder(R.drawable.ic_foto)
+                .into(holder.imageView);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Imagen imagen = imagenes[position];
+                Imagen imagen = imagenes.get(position);
                 Intent intent = new Intent(context, ImagenDetalleActivity.class);
                 intent.putExtra(ImagenDetalleActivity.EXTRA_PHOTO, imagen);
                 context.startActivity(intent);
@@ -54,7 +56,7 @@ public class ImagenAdapter extends RecyclerView.Adapter<ImagenAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return imagenes.length;
+        return imagenes.size();
     }
 
     @Override

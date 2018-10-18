@@ -31,8 +31,8 @@ public class FotosRefugioFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
 
-        ImagenAdapter adapter = new ImagenAdapter(getContext(), Imagen.getImagenes());
-        recyclerView.setAdapter(adapter);
+        //ImagenAdapter adapter = new ImagenAdapter(getContext(), Imagen.getImagenes());
+        //recyclerView.setAdapter(adapter);
 
         return  view;
     }
