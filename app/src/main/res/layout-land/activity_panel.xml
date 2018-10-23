@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PanelActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/sierra_nevada">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/nav_header_desc"
+                android:paddingTop="@dimen/nav_header_vertical_spacing"
+                app:srcCompat="@drawable/ic_stat_name" />
+
+            <TextView
+                android:id="@+id/tvNombreUsu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:paddingTop="@dimen/nav_header_vertical_spacing"
+                android:text="Inicie sesión"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/blanco"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/bt_cambiarClave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="130dp"
+            android:layout_marginBottom="8dp"
+            android:text="Cambiar contraseña"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.100000024" />
+
+        <Button
+            android:id="@+id/bt_cambiarNombre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Cambiar nombre"
+            app:layout_constraintEnd_toEndOf="@+id/bt_cambiarClave"
+            app:layout_constraintStart_toStartOf="@+id/bt_cambiarClave"
+            app:layout_constraintTop_toBottomOf="@+id/bt_cambiarClave" />
+
+        <Button
+            android:id="@+id/bt_cerrarSesion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Cerrar sesión"
+            app:layout_constraintEnd_toEndOf="@+id/bt_cambiarNombre"
+            app:layout_constraintStart_toStartOf="@+id/bt_cambiarNombre"
+            app:layout_constraintTop_toBottomOf="@+id/bt_cambiarNombre" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</LinearLayout>

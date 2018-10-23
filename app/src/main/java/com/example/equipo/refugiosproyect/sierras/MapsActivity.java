@@ -1,11 +1,13 @@
 package com.example.equipo.refugiosproyect.sierras;
 
+import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -14,7 +16,10 @@ import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.equipo.refugiosproyect.ClasesPrincipales.BBDD;
+import com.example.equipo.refugiosproyect.ClasesPrincipales.Refugio;
 import com.example.equipo.refugiosproyect.R;
+import com.example.equipo.refugiosproyect.refugios.RefugioActivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -34,6 +39,12 @@ import com.google.maps.android.kml.KmlLayer;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 
 public class MapsActivity extends FragmentActivity implements
@@ -48,11 +59,13 @@ public class MapsActivity extends FragmentActivity implements
     private Criteria criteria;
     private String proveedor = "";
     private GoogleMap mapa;
-    private LatLng ubeire = new LatLng(37.1185152, -2.9021601);
+    private LatLng refugio;
     private boolean primera = true;
     private FloatingActionButton floatingActionButton;
     private String lat,lon,nombreSierra;
     private double longitud,latitud;
+
+    private ArrayList<Refugio> refugios = new ArrayList<>();
 
     //IMPLEMENTACION
 
@@ -70,6 +83,8 @@ public class MapsActivity extends FragmentActivity implements
         nombreSierra = getIntent().getExtras().getString("nombreSierra");
 
         sierraCoor = new LatLng(latitud, longitud);
+
+        refugios = (ArrayList<Refugio>) getIntent().getSerializableExtra("refugios");
 
         manejador = (LocationManager) getSystemService(LOCATION_SERVICE);
 
@@ -108,9 +123,12 @@ public class MapsActivity extends FragmentActivity implements
     @Override
     protected void onStart() {
         super.onStart();
+
         if (googleApiClient !=null){
             googleApiClient.connect();
         }
+
+
     }
 
     @Override
@@ -198,16 +216,30 @@ public class MapsActivity extends FragmentActivity implements
 
     }
 
-    private void añadirMarcadores(Boolean primera) throws IOException, XmlPullParserException {
+    private void marcadorRefugio(String nombre, String alt, String lon){
+        double altitud = Double.parseDouble(alt);
+        double longitud = Double.parseDouble(lon);
+
+        refugio = new LatLng(altitud,longitud);
 
         Marker marker = mapa.addMarker(new MarkerOptions()
-                .position(ubeire)
-                .title("Ubeire")
+                .position(refugio)
+                .title(nombre)
                 .icon(BitmapDescriptorFactory
                         .fromResource(android.R.drawable.ic_menu_compass))
                 .anchor(0.5f, 0.5f));
 
         marker.showInfoWindow();
+
+    }
+
+    private void añadirMarcadores(Boolean primera) throws IOException, XmlPullParserException {
+
+        for (int i=0;i<refugios.size();i++){
+            marcadorRefugio(refugios.get(i).getNombre(),
+                    refugios.get(i).getLatitud(),
+                    refugios.get(i).getLongitud());
+        }
 
         mapa.addMarker(new MarkerOptions().position(sierraCoor).title(nombreSierra));
 
@@ -218,5 +250,7 @@ public class MapsActivity extends FragmentActivity implements
         }
 
     }
+
+
 
 }

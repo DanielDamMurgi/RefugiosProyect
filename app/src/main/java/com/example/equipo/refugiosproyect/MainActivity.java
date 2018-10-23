@@ -1,14 +1,11 @@
 package com.example.equipo.refugiosproyect;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.widget.CardView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -31,13 +28,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     //ATRIBUTOS
     private static final int PERMISSIONS_REQUEST_FINE_LOCATION = 111;
 
-    public static ArrayList<Usuario> usuario;
+    public static ArrayList<Usuario> usuarios;
     private static Intent intent;
     private static Button btLogin, btRegistrar;
     private View headerView;
@@ -50,11 +49,12 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //PIDE PERMISOS PARA UBICACION
         ActivityCompat.requestPermissions(MainActivity.this,
                 new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                 PERMISSIONS_REQUEST_FINE_LOCATION);
 
-        usuario = new ArrayList<>();
+        usuarios = new ArrayList<>();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -76,36 +76,60 @@ public class MainActivity extends AppCompatActivity
         btRegistrar = headerView.findViewById(R.id.bt_registrar_DL);
         tvNombreUsu = headerView.findViewById(R.id.tvNombreUsu);
 
-        ActualizarEstado(LoginActivity.isLogin(),getApplicationContext());
+        ActualizarEstado(LoginActivity.isLogin(), getApplicationContext());
 
     }
 
-    public static void ActualizarEstado(boolean login, final Context context){
-        if (login){
-            tvNombreUsu.setText(usuario.get(0).getNombre());
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //cargarpreferencias();
+    }
+
+    @Override
+    protected void onDestroy() {
+        //guardarpreferencias();
+        super.onDestroy();
+    }
+
+    public void guardarpreferencias() {
+        SharedPreferences preferences = getSharedPreferences("lista", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("login",LoginActivity.isLogin());
+        if (!usuarios.isEmpty()){
+            editor.putInt("id",usuarios.get(0).getId());
+            editor.putString("correo",usuarios.get(0).getEmail());
+            editor.putString("nombre",usuarios.get(0).getNombre());
+            editor.putString("clave",usuarios.get(0).getClave());
+        }
+        editor.commit();
+    }
+
+    public void cargarpreferencias() {
+
+        SharedPreferences preferences = getSharedPreferences("lista", Context.MODE_PRIVATE);
+        LoginActivity.setLogin(preferences.getBoolean("login",false));
+        if (LoginActivity.isLogin()){
+            int id = preferences.getInt("id",0);
+            String correo = preferences.getString("correo","");
+            String nombre = preferences.getString("nombre","");
+            String clave = preferences.getString("clave","");
+            usuarios.add(new Usuario(id,correo,nombre,clave));
+        }
+
+    }
+
+    public static void ActualizarEstado(boolean login, final Context context) {
+        if (login) {
+            tvNombreUsu.setText(usuarios.get(0).getNombre());
             btLogin.setText(R.string.perfil);
             btRegistrar.setText(R.string.cerrar_sesion);
-
-            btRegistrar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    usuario.clear();
-                    LoginActivity.setLogin(false);
-
-                    ActualizarEstado(LoginActivity.isLogin(),context);
-
-                }
-            });
-        }
-        else{
-            tvNombreUsu.setText(R.string.inicie_sesion);
-            btLogin.setText(R.string.iniciar_sesion);
-            btRegistrar.setText(R.string.registrar);
 
             btLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context,LoginActivity.class);
+                    Intent intent = new Intent(context, PanelActivity.class);
+                    intent.putExtra("usuarios", usuarios);
                     context.startActivity(intent);
                 }
             });
@@ -113,7 +137,34 @@ public class MainActivity extends AppCompatActivity
             btRegistrar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    intent = new Intent(context,RegistroActivity.class);
+                    usuarios.clear();
+                    LoginActivity.setLogin(false);
+                    //SharedPreferences.Editor editor = sharedPreferences.edit();
+                    //editor.clear();
+                    //editor.putBoolean("login",false);
+                    //editor.commit();
+
+                    ActualizarEstado(LoginActivity.isLogin(), context);
+
+                }
+            });
+        } else {
+            tvNombreUsu.setText(R.string.inicie_sesion);
+            btLogin.setText(R.string.iniciar_sesion);
+            btRegistrar.setText(R.string.registrar);
+
+            btLogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, LoginActivity.class);
+                    context.startActivity(intent);
+                }
+            });
+
+            btRegistrar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    intent = new Intent(context, RegistroActivity.class);
                     context.startActivity(intent);
                 }
             });
@@ -181,8 +232,5 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
-
 
 }//FIN CLASE PRINCIPAL

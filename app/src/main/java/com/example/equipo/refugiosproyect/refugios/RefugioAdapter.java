@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.equipo.refugiosproyect.ClasesPrincipales.Refugio;
 import com.example.equipo.refugiosproyect.R;
 
@@ -44,7 +45,12 @@ class RefugioAdapter extends RecyclerView.Adapter<RefugioAdapter.ViewHolder> imp
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String situacion;
 
-        viewHolder.imageViewRefugio.setImageResource(refugios.get(position).getFoto());
+        Glide.with(context)
+                .load(refugios.get(position).getFoto().trim())
+                .placeholder(R.drawable.ic_foto)
+                .into(holder.imageViewRefugio);
+
+
         viewHolder.textViewNom.setText(refugios.get(position).getNombre());
         viewHolder.textViewAlt.setText(refugios.get(position).getAltitud() + " m");
 

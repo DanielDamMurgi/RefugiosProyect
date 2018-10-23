@@ -1,6 +1,11 @@
 package com.example.equipo.refugiosproyect.ClasesPrincipales;
 
-public class Usuario {
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import java.io.Serializable;
+
+public class Usuario implements Serializable {
     //ATRIBUTOS-----------------------------------------------------------
     private int id;
     private String email;
@@ -50,4 +55,5 @@ public class Usuario {
     public void setClave(String clave) {
         this.clave = clave;
     }
+
 }

@@ -114,7 +114,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                     etClave1.requestFocus();
                     break;
                 } else {
-                    String insert = "INSERT INTO usuario (correo, nombre, clave) "
+                    String insert = "INSERT INTO usuarios (correo, nombre, clave) "
                             + "VALUES ('" + correo + "', '" + nombre + "', "
                             + "'" + clave1 + "');";
 

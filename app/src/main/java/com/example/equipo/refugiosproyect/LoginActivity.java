@@ -1,5 +1,6 @@
 package com.example.equipo.refugiosproyect;
 
+
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -58,7 +59,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }else if (!ComprobarClave()){
                     etClave.setError("Inserta la contraseña");
                     etClave.requestFocus();
-            }else{
+                }else{
                     String consulta = "select * from usuario where correo='"+correo+"' and clave='"+clave+"'";
                     new LoginUsuario(consulta).execute();
                     finish();
@@ -118,26 +119,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             super.onPostExecute(resultSet);
 
 
-                try {
-                    while (resultSet.next()) {
-                        usuario = new Usuario(resultSet.getInt(1), resultSet.getString(2),
-                                resultSet.getString(3), resultSet.getString(4));
-                    }
-                    connection.close();
-                    statement.cancel();
-                    this.resultSet.close();
-
-                    if (usuario == null){
-                        Toast.makeText(getApplicationContext(),"Credenciales incorrectas",Toast.LENGTH_LONG).show();
-                    }else{
-                        login = true;
-                        MainActivity.usuario.add(usuario);
-                        MainActivity.ActualizarEstado(login,getApplicationContext());
-                    }
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
+            try {
+                while (resultSet.next()) {
+                    usuario = new Usuario(resultSet.getInt(1), resultSet.getString(2),
+                            resultSet.getString(3), resultSet.getString(4));
                 }
+                connection.close();
+                statement.cancel();
+                this.resultSet.close();
+
+                if (usuario == null){
+                    Toast.makeText(getApplicationContext(),"Credenciales incorrectas",Toast.LENGTH_LONG).show();
+                }else{
+                    login = true;
+                    MainActivity.usuarios.add(usuario);
+                    MainActivity.ActualizarEstado(login,getApplicationContext());
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
         }
     }

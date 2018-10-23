@@ -58,14 +58,11 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        //cargar();
         mRecyclerView_sierras = view.findViewById(R.id.recyclerView_sierras);
 
         mLayoutManager_sierras = new LinearLayoutManager(view.getContext());
         mRecyclerView_sierras.setLayoutManager(mLayoutManager_sierras);
 
-
-        //lanzarAdapter();
         return view;
     }
 
@@ -73,13 +70,6 @@ public class MainFragment extends Fragment {
         MainAdapter adapter = new MainAdapter(getActivity(), sierras);
         mRecyclerView_sierras.setLayoutManager(mLayoutManager_sierras);
         mRecyclerView_sierras.setAdapter(adapter);
-    }
-
-    private void cargar() {
-        sierras.add(new Sierra("Sierra nevada","https://drive.google.com/file/d/1_UYmF-NEjuYYAtRg4xMI8OqmgvtKRvQ3/view"));
-        //sierras.add(new Sierra("Sierra no nevada",R.drawable.sierra_nevada));
-        //sierras.add(new Sierra("Sierra nevada",R.drawable.sierra_nevada));
-        //sierras.add(new Sierra("Sierra no nevada",R.drawable.sierra_nevada));
     }
 
     public class CargarSierras extends AsyncTask<Void, Void, ResultSet> {
