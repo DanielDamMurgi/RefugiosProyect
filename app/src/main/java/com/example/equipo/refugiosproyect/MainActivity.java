@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -83,16 +84,18 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
-        //cargarpreferencias();
+        cargarpreferencias();
     }
 
     @Override
-    protected void onDestroy() {
-        //guardarpreferencias();
-        super.onDestroy();
+    protected void onStop() {
+        guardarpreferencias();
+
+        super.onStop();
     }
 
     public void guardarpreferencias() {
+        Log.d("DATO","guardado");
         SharedPreferences preferences = getSharedPreferences("lista", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean("login",LoginActivity.isLogin());
@@ -106,7 +109,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void cargarpreferencias() {
-
+        Log.d("DATO","cargado");
         SharedPreferences preferences = getSharedPreferences("lista", Context.MODE_PRIVATE);
         LoginActivity.setLogin(preferences.getBoolean("login",false));
         if (LoginActivity.isLogin()){
@@ -116,6 +119,8 @@ public class MainActivity extends AppCompatActivity
             String clave = preferences.getString("clave","");
             usuarios.add(new Usuario(id,correo,nombre,clave));
         }
+
+        ActualizarEstado(LoginActivity.isLogin(), getApplicationContext());
 
     }
 
