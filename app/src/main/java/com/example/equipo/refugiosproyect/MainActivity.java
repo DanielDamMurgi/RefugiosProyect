@@ -1,12 +1,11 @@
 package com.example.equipo.refugiosproyect;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,9 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.equipo.refugiosproyect.ClasesPrincipales.BBDD;
+
 import com.example.equipo.refugiosproyect.ClasesPrincipales.Usuario;
 
 import java.sql.Connection;
@@ -95,7 +93,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void guardarpreferencias() {
-        Log.d("DATO","guardado");
         SharedPreferences preferences = getSharedPreferences("lista", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean("login",LoginActivity.isLogin());
@@ -109,7 +106,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void cargarpreferencias() {
-        Log.d("DATO","cargado");
         SharedPreferences preferences = getSharedPreferences("lista", Context.MODE_PRIVATE);
         LoginActivity.setLogin(preferences.getBoolean("login",false));
         if (LoginActivity.isLogin()){
@@ -122,6 +118,15 @@ public class MainActivity extends AppCompatActivity
 
         ActualizarEstado(LoginActivity.isLogin(), getApplicationContext());
 
+    }
+
+    public static void limpiarPreferences(){
+        Activity activity = new Activity();
+        SharedPreferences preferences = activity.getSharedPreferences("lista", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.putBoolean("login",false);
+        editor.commit();
     }
 
     public static void ActualizarEstado(boolean login, final Context context) {
@@ -144,11 +149,8 @@ public class MainActivity extends AppCompatActivity
                 public void onClick(View v) {
                     usuarios.clear();
                     LoginActivity.setLogin(false);
-                    //SharedPreferences.Editor editor = sharedPreferences.edit();
-                    //editor.clear();
-                    //editor.putBoolean("login",false);
-                    //editor.commit();
 
+                    //limpiarPreferences();
                     ActualizarEstado(LoginActivity.isLogin(), context);
 
                 }

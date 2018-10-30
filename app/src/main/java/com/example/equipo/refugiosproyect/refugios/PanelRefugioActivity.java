@@ -8,7 +8,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
+import com.example.equipo.refugiosproyect.ClasesPrincipales.Refugio;
 import com.example.equipo.refugiosproyect.R;
 
 import java.util.ArrayList;
@@ -18,16 +20,20 @@ public class PanelRefugioActivity extends AppCompatActivity{
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private Refugio refugio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_panel_refugio);
 
+        refugio = (Refugio) getIntent().getExtras().getSerializable("refugio");
+
         Toolbar toolbar = findViewById(R.id.toolbar_panelRefugio);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(refugio.getNombre());
 
         viewPager = findViewById(R.id.viewpager_panelRefugio);
         añadirTabs(viewPager);
@@ -40,8 +46,11 @@ public class PanelRefugioActivity extends AppCompatActivity{
     private void añadirTabs(ViewPager viewPager){
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.añadirFragmento(new InfoRefugioFragment(), "Información");
+        InfoRefugioFragment.setInfo(refugio.getInfo());
         adapter.añadirFragmento(new RutasFragment(),"Rutas");
+        RutasFragment.getIdRefugio(refugio);
         adapter.añadirFragmento(new FotosRefugioFragment(), "Fotos");
+        FotosRefugioFragment.setId(refugio.getId());
         viewPager.setAdapter(adapter);
     }
 

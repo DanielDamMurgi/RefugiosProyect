@@ -7,12 +7,11 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.equipo.refugiosproyect.ClasesPrincipales.Refugio;
 import com.example.equipo.refugiosproyect.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -30,7 +29,11 @@ import com.google.maps.android.kml.KmlLayer;
 
 import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
 public class MapaRutasActivity extends FragmentActivity implements
         GoogleApiClient.ConnectionCallbacks,
@@ -44,8 +47,9 @@ public class MapaRutasActivity extends FragmentActivity implements
     private String proveedor = "";
     private GoogleMap mapa;
     private KmlLayer layer = null;
-    private int archivo;
-    private LatLng refugio,sierra;
+    private String archivo;
+    private LatLng refugioLL,sierra;
+    private Refugio refugio;
 
     //IMPLEMENTACION
 
@@ -54,8 +58,14 @@ public class MapaRutasActivity extends FragmentActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa_rutas);
 
+        archivo = getIntent().getExtras().getString("ruta");
+        refugio = (Refugio) getIntent().getExtras().getSerializable("refugio");
+
+        double lat = Double.parseDouble(refugio.getLatitud());
+        double lon = Double.parseDouble(refugio.getLongitud());
+
         sierra = new LatLng(37.074253, -3.1327653);
-        refugio = new LatLng(37.1185152, -2.9021601);
+        refugioLL = new LatLng(lat, lon);
 
         manejador = (LocationManager) getSystemService(LOCATION_SERVICE);
 
@@ -81,7 +91,13 @@ public class MapaRutasActivity extends FragmentActivity implements
                 .enableAutoManage(this, this)
                 .build();
 
-        archivo = getIntent().getExtras().getInt("ruta");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
     }
 
     @Override
@@ -140,7 +156,7 @@ public class MapaRutasActivity extends FragmentActivity implements
         }
 
         manejador.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2000000, 200, this);
-        mapa.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+        mapa.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
         añadirMarcadores();
 
@@ -152,8 +168,8 @@ public class MapaRutasActivity extends FragmentActivity implements
     private void añadirMarcadores() {
 
         Marker marker = mapa.addMarker(new MarkerOptions()
-                .position(refugio)
-                .title("Ubeire")
+                .position(refugioLL)
+                .title(refugio.getNombre())
                 .icon(BitmapDescriptorFactory
                         .fromResource(android.R.drawable.ic_menu_compass))
                 .anchor(0.5f, 0.5f));
@@ -161,19 +177,22 @@ public class MapaRutasActivity extends FragmentActivity implements
         marker.showInfoWindow();
 
         mapa.addMarker(new MarkerOptions().position(sierra).title("Sierra Nevada"));
-        mapa.moveCamera(CameraUpdateFactory.newLatLng(refugio));
-        mapa.animateCamera(CameraUpdateFactory.newLatLngZoom(refugio, 14));
+        mapa.moveCamera(CameraUpdateFactory.newLatLng(refugioLL));
+        mapa.animateCamera(CameraUpdateFactory.newLatLngZoom(refugioLL, 14));
+
 
     }
 
-    private void añadirRuta(){
-        try {
-            layer = new KmlLayer(mapa,archivo,getApplicationContext());
-            layer.addLayerToMap();
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        private void añadirRuta(){
+
+            try {
+                layer = new KmlLayer(mapa, getResources().getIdentifier(archivo,
+                        "raw", getPackageName()), getApplicationContext());
+                layer.addLayerToMap();
+            } catch (XmlPullParserException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 }

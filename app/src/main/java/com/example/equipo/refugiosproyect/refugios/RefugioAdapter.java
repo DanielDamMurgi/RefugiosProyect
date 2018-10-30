@@ -22,6 +22,7 @@ class RefugioAdapter extends RecyclerView.Adapter<RefugioAdapter.ViewHolder> imp
     private ArrayList<Refugio> refugios;
     private ViewHolder viewHolder;
     private Intent intent;
+    private Refugio refugio;
 
     public RefugioAdapter() {
 
@@ -42,7 +43,7 @@ class RefugioAdapter extends RecyclerView.Adapter<RefugioAdapter.ViewHolder> imp
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         String situacion;
 
         Glide.with(context)
@@ -68,6 +69,8 @@ class RefugioAdapter extends RecyclerView.Adapter<RefugioAdapter.ViewHolder> imp
             @Override
             public void onClick(View v) {
                 intent = new Intent(context,PanelRefugioActivity.class);
+                refugio = refugios.get(position);
+                intent.putExtra("refugio",refugio);
                 context.startActivity(intent);
             }
         });

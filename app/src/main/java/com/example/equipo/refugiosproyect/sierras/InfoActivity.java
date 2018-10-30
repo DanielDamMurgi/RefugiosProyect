@@ -50,7 +50,9 @@ public class InfoActivity extends AppCompatActivity {
 
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
 
         collapsingToolbarLayout = findViewById(R.id.collapsingToolbar_refugios);
         collapsingToolbarLayout.setTitle(nombre);

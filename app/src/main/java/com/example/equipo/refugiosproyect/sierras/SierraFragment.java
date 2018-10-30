@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +25,7 @@ import java.sql.Statement;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-public class SierraFragment extends Fragment implements View.OnClickListener{
+public class SierraFragment extends Fragment implements View.OnClickListener, FragmentManager.OnBackStackChangedListener {
 
     private CardView infoCard, refugioCard, fotosCard, mapaCard;
     private Sierra sierra;
@@ -53,7 +54,9 @@ public class SierraFragment extends Fragment implements View.OnClickListener{
         mapaCard = view.findViewById(R.id.cardView_mapaSierra);
         mapaCard.setOnClickListener(this);
 
-        sierra = (Sierra) getActivity().getIntent().getExtras().getSerializable("sierra");
+
+            sierra = (Sierra) getActivity().getIntent().getExtras().getSerializable("sierra");
+
 
 
         return view;
@@ -120,6 +123,11 @@ public class SierraFragment extends Fragment implements View.OnClickListener{
 
                 break;
         }
+
+    }
+
+    @Override
+    public void onBackStackChanged() {
 
     }
 

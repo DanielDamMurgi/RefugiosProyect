@@ -2,35 +2,57 @@ package com.example.equipo.refugiosproyect.ClasesPrincipales;
 
 public class Ruta {
     //ATRIBUTOS--------------------------------------------------------------
-    private String id;
+    private int id;
+    private int id_refugio;
+    private String kml;
+    private String imagen;
     private String nombre;
-    private int imagen;
-    private int kml;
 
     //CONSTRUCTORES-----------------------------------------------------------
 
     public Ruta() {
     }
 
-    public Ruta(String nombre, int imagen) {
-        this.nombre = nombre;
+    public Ruta(int id, int id_refugio, String kml, String imagen, String nombre) {
+        this.id = id;
+        this.id_refugio = id_refugio;
+        this.kml = kml;
         this.imagen = imagen;
+        this.nombre = nombre;
     }
 
-    public Ruta(String id, String nombre, int imagen, int kml) {
-        this.id = id;
-        this.nombre = nombre;
-        this.imagen = imagen;
-        this.kml = kml;
-    }
     //GETTERS Y SETTERS-----------------------------------------------------------
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public int getId_refugio() {
+        return id_refugio;
+    }
+
+    public void setId_refugio(int id_refugio) {
+        this.id_refugio = id_refugio;
+    }
+
+    public String getKml() {
+        return kml;
+    }
+
+    public void setKml(String kml) {
+        this.kml = kml;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public String getNombre() {
@@ -39,21 +61,5 @@ public class Ruta {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public int getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(int imagen) {
-        this.imagen = imagen;
-    }
-
-    public int getKml() {
-        return kml;
-    }
-
-    public void setKml(int kml) {
-        this.kml = kml;
     }
 }

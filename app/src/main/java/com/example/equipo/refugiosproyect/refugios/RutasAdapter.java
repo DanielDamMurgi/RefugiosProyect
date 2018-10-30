@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.equipo.refugiosproyect.ClasesPrincipales.Refugio;
 import com.example.equipo.refugiosproyect.ClasesPrincipales.Ruta;
 import com.example.equipo.refugiosproyect.R;
+import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -23,11 +25,13 @@ class RutasAdapter extends RecyclerView.Adapter<RutasAdapter.ViewHolder> impleme
     private ArrayList<Ruta> rutas;
     private Context context;
     Intent intent ;
+    private Refugio refugio;
 
-    public RutasAdapter(Context context, ArrayList<Ruta> rutas) {
+    public RutasAdapter(Context context, ArrayList<Ruta> rutas, Refugio refugio) {
         this.context = context;
         this.rutas = new ArrayList<>();
         this.rutas = rutas;
+        this.refugio = refugio;
     }
 
     @NonNull
@@ -41,7 +45,8 @@ class RutasAdapter extends RecyclerView.Adapter<RutasAdapter.ViewHolder> impleme
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
-        holder.imageView.setImageResource(rutas.get(position).getImagen());
+        Picasso.with(context).load(rutas.get(position).getImagen().trim()).into(holder.imageView);
+        //holder.imageView.setImageResource(rutas.get(position).getImagen());
         holder.textView.setText(rutas.get(position).getNombre());
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +54,7 @@ class RutasAdapter extends RecyclerView.Adapter<RutasAdapter.ViewHolder> impleme
             public void onClick(View v) {
                 intent = new Intent(context,MapaRutasActivity.class);
                 intent.putExtra("ruta",rutas.get(position).getKml());
+                intent.putExtra("refugio",refugio);
                 context.startActivity(intent);
             }
         });

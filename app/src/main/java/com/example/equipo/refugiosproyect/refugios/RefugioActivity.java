@@ -46,6 +46,7 @@ public class RefugioActivity extends AppCompatActivity {
 
     }
 
+
     public void lanzarAdapter() {
         RefugioAdapter adapter = new RefugioAdapter(this, refugios);
         mRecyclerView_refugios.setLayoutManager(mLayoutManager_refugios);
