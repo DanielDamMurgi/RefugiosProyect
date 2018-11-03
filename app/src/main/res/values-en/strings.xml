@@ -17,4 +17,14 @@
     <string name="informacion">Information</string>
     <string name="refugios">Refuges</string>
     <string name="fotos">Photos</string>
+    <string name="insertar_clave">Insert the password</string>
+    <string name="clave_incorrecta">Incorrect password</string>
+    <string name="clave_no_coinciden">Passwords do not match</string>
+    <string name="clave_min_caracteres">" The password must have at least 9 characters"</string>
+    <string name="inserta_nombre">Insert the name</string>
+    <string name="correo_no_valido">Invalid email</string>
+    <string name="nombre_cambiado">Name changed</string>
+    <string name="error_cambiar_nombre">Error changing name</string>
+    <string name="clave_cambiada">Password changed</string>
+    <string name="error_cambiar_clave">Error changing password</string>
 </resources>

@@ -1,20 +1,16 @@
 package com.example.equipo.refugiosproyect;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.equipo.refugiosproyect.ClasesPrincipales.BBDD;
-import com.example.equipo.refugiosproyect.Operaciones;
+import com.example.equipo.refugiosproyect.clasesPrincipales.BBDD;
 
 
 import java.sql.Connection;
@@ -51,8 +47,8 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private boolean validarNombre(String nombre) {
-        if (nombre.length()==0) {
-            Toast.makeText(this, "Inserta el nombre",Toast.LENGTH_LONG).show();
+        if (nombre.length()<=0) {
+            //Toast.makeText(this, "Inserta el nombre",Toast.LENGTH_LONG).show();
             return false;
         } else {
             this.nombre = nombre;
@@ -70,7 +66,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
-
+//TODO: TRADUCCIONES
     //Return true si la contraseña es valida
     private boolean validarContraseña() {
         clave1 = etClave1.getText().toString().trim();
@@ -78,21 +74,18 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
 
         if (clave1.length() > 0) {
             if (clave1.length() < 9) {
-                //Toast.makeText(this, "La contraseña debe de tener mínimo 9 caracteres",Toast.LENGTH_LONG).show();
-                etClave1.setError("La contraseña debe de tener mínimo 9 caracteres");
+                etClave1.setError(getResources().getString(R.string.clave_min_caracteres));
                 return false;
             } else {
                 if (clave1.equals(clave2)) {
                     return true;
                 } else {
-                    //Toast.makeText(this,"Las contraseñas no coinciden",Toast.LENGTH_LONG).show();
-                    etClave1.setError("Las contraseñas no coinciden");
+                    etClave1.setError(getResources().getString(R.string.clave_no_coinciden));
                     return false;
                 }
             }
         } else {
-            //Toast.makeText(this, "Inserta la contraseña",Toast.LENGTH_LONG).show();
-            etClave1.setError("Inserta la contraseña");
+            etClave1.setError(getResources().getString(R.string.insertar_clave));
             return false;
         }
 
@@ -103,11 +96,11 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId()) {
             case R.id.cardView_registrar_RA:
                 if (!validarEmail(etCorreo.getText().toString().trim())) {
-                    etCorreo.setError("Email no válido");
+                    etCorreo.setError(getResources().getString(R.string.correo_no_valido));
                     etCorreo.requestFocus();
                     break;
                 } else if (!validarNombre(etNombre.getText().toString().trim())) {
-                    etNombre.setError("Inserta el nombre");
+                    etNombre.setError(getResources().getString(R.string.inserta_nombre));
                     etNombre.requestFocus();
                     break;
                 } else if (!validarContraseña()) {

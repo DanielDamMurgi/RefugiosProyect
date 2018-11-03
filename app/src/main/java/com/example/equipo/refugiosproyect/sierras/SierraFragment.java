@@ -11,9 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.equipo.refugiosproyect.ClasesPrincipales.BBDD;
-import com.example.equipo.refugiosproyect.ClasesPrincipales.Refugio;
-import com.example.equipo.refugiosproyect.ClasesPrincipales.Sierra;
+import com.example.equipo.refugiosproyect.clasesPrincipales.BBDD;
+import com.example.equipo.refugiosproyect.clasesPrincipales.Refugio;
+import com.example.equipo.refugiosproyect.clasesPrincipales.Sierra;
 import com.example.equipo.refugiosproyect.R;
 import com.example.equipo.refugiosproyect.refugios.RefugioActivity;
 

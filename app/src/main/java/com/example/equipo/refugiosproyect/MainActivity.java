@@ -19,16 +19,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
-import com.example.equipo.refugiosproyect.ClasesPrincipales.Usuario;
+import com.example.equipo.refugiosproyect.clasesPrincipales.Usuario;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.equipo.refugiosproyect.ClasesPrincipales.Refugio;
+import com.example.equipo.refugiosproyect.clasesPrincipales.Refugio;
 import com.example.equipo.refugiosproyect.R;
 
 import java.util.ArrayList;

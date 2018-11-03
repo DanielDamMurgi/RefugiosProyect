@@ -6,11 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.GridLayout;
 
-import com.example.equipo.refugiosproyect.ClasesPrincipales.BBDD;
-import com.example.equipo.refugiosproyect.ClasesPrincipales.Imagen;
-import com.example.equipo.refugiosproyect.ClasesPrincipales.Sierra;
+import com.example.equipo.refugiosproyect.clasesPrincipales.BBDD;
+import com.example.equipo.refugiosproyect.clasesPrincipales.Imagen;
 import com.example.equipo.refugiosproyect.ImagenAdapter;
 import com.example.equipo.refugiosproyect.R;
 

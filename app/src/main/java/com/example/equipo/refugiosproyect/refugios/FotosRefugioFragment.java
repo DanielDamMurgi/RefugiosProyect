@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.equipo.refugiosproyect.ClasesPrincipales.BBDD;
-import com.example.equipo.refugiosproyect.ClasesPrincipales.Imagen;
+import com.example.equipo.refugiosproyect.clasesPrincipales.BBDD;
+import com.example.equipo.refugiosproyect.clasesPrincipales.Imagen;
 import com.example.equipo.refugiosproyect.ImagenAdapter;
 import com.example.equipo.refugiosproyect.R;
 
@@ -65,7 +65,7 @@ public class FotosRefugioFragment extends Fragment {
 
         if (fotosRefugios.isEmpty() || fotosRefugios.get(0).getId() != id_refugio){
             fotosRefugios.clear();
-            progressDialog.show();
+            //progressDialog.show();
             String consulta = "select distinct * from foto_refugio where id_refugio = "+id_refugio;
             new CargarFotosRefugios(consulta,progressDialog).execute();
             actualizacionFotoRefugio = new ActualizacionFotoRefugio();

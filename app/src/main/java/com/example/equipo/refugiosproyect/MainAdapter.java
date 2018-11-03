@@ -11,11 +11,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.equipo.refugiosproyect.ClasesPrincipales.Sierra;
+import com.example.equipo.refugiosproyect.clasesPrincipales.Sierra;
 import com.example.equipo.refugiosproyect.sierras.SierraActivity;
 import com.squareup.picasso.Picasso;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> implements View.OnClickListener {

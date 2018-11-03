@@ -74,11 +74,14 @@
             android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".PanelActivity"
-            android:theme="@style/AppThemeNoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".CambiarClaveActivity"
-            android:theme="@style/AppThemeNoActionBar"
-            android:screenOrientation="portrait"></activity>
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".CambiarClaveActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".CambiarNombreActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity android:name=".weather.WeatherActivity"></activity>
     </application>
 
 </manifest>

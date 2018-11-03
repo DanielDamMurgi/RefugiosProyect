@@ -7,10 +7,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.equipo.refugiosproyect.ClasesPrincipales.BBDD;
-import com.example.equipo.refugiosproyect.ClasesPrincipales.Refugio;
+import com.example.equipo.refugiosproyect.clasesPrincipales.BBDD;
+import com.example.equipo.refugiosproyect.clasesPrincipales.Refugio;
 import com.example.equipo.refugiosproyect.R;
-import com.example.equipo.refugiosproyect.sierras.MapsActivity;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -11,12 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.equipo.refugiosproyect.ClasesPrincipales.Refugio;
-import com.example.equipo.refugiosproyect.ClasesPrincipales.Ruta;
+import com.example.equipo.refugiosproyect.clasesPrincipales.Refugio;
+import com.example.equipo.refugiosproyect.clasesPrincipales.Ruta;
 import com.example.equipo.refugiosproyect.R;
 import com.squareup.picasso.Picasso;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 class RutasAdapter extends RecyclerView.Adapter<RutasAdapter.ViewHolder> implements View.OnClickListener {

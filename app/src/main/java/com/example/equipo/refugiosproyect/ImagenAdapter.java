@@ -4,16 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.equipo.refugiosproyect.ClasesPrincipales.Imagen;
+import com.example.equipo.refugiosproyect.clasesPrincipales.Imagen;
 
 import java.util.ArrayList;
 

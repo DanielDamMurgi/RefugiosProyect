@@ -1,4 +1,4 @@
-package com.example.equipo.refugiosproyect.ClasesPrincipales;
+package com.example.equipo.refugiosproyect.clasesPrincipales;
 
 public class Ruta {
     //ATRIBUTOS--------------------------------------------------------------

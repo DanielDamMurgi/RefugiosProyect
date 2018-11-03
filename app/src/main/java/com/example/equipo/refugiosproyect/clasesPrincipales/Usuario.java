@@ -1,7 +1,4 @@
-package com.example.equipo.refugiosproyect.ClasesPrincipales;
-
-import android.content.Context;
-import android.content.SharedPreferences;
+package com.example.equipo.refugiosproyect.clasesPrincipales;
 
 import java.io.Serializable;
 

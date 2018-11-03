@@ -1,6 +1,4 @@
-package com.example.equipo.refugiosproyect.ClasesPrincipales;
-
-import android.os.Parcel;
+package com.example.equipo.refugiosproyect.clasesPrincipales;
 
 import java.io.Serializable;
 

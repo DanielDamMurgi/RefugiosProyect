@@ -6,7 +6,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.equipo.refugiosproyect.ClasesPrincipales.Imagen;
+import com.example.equipo.refugiosproyect.clasesPrincipales.Imagen;
 
 public class ImagenDetalleActivity extends AppCompatActivity {
 
