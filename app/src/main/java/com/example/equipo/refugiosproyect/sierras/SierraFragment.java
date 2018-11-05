@@ -16,6 +16,7 @@ import com.example.equipo.refugiosproyect.clasesPrincipales.Refugio;
 import com.example.equipo.refugiosproyect.clasesPrincipales.Sierra;
 import com.example.equipo.refugiosproyect.R;
 import com.example.equipo.refugiosproyect.refugios.RefugioActivity;
+import com.example.equipo.refugiosproyect.weather.WeatherActivity;
 
 
 import java.sql.DriverManager;
@@ -108,7 +109,8 @@ public class SierraFragment extends Fragment implements View.OnClickListener, Fr
                 break;
 
             case R.id.cardView_mapaSierra:
-                if (refugios.isEmpty()){
+                //TODO : pasar a refugios
+                /*if (refugios.isEmpty()){
                     Toast.makeText(getContext(),"Cargando refugios",Toast.LENGTH_LONG).show();
                 }else {
                     i = new Intent(getActivity(), MapsActivity.class);
@@ -117,7 +119,10 @@ public class SierraFragment extends Fragment implements View.OnClickListener, Fr
                     i.putExtra("nombreSierra", sierra.getNombre());
                     i.putExtra("refugios", refugios);
                     startActivity(i);
-                }
+                }*/
+
+                i = new Intent(getActivity(), WeatherActivity.class);
+                startActivity(i);
                 break;
             default:
 

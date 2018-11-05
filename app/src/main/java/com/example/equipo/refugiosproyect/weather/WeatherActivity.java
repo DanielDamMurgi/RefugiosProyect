@@ -1,18 +1,25 @@
 package com.example.equipo.refugiosproyect.weather;
 
 import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Looper;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.example.equipo.refugiosproyect.R;
+import com.example.equipo.refugiosproyect.weather.common.Common;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -34,6 +41,7 @@ public class WeatherActivity extends AppCompatActivity {
     private LocationCallback locationCallback;
     private LocationRequest locationRequest;
 
+    //IMPLEMENTACION
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +60,16 @@ public class WeatherActivity extends AppCompatActivity {
                 .withListener(new MultiplePermissionsListener() {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        if (report.areAllPermissionsGranted()) {
+                            buildLocationRequest();
+                            buildLocationCallBack();
 
+                            if (ActivityCompat.checkSelfPermission(WeatherActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(WeatherActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                                return;
+                            }
+                            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(WeatherActivity.this);
+                            fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
+                        }
                     }
 
                     @Override
@@ -61,6 +78,38 @@ public class WeatherActivity extends AppCompatActivity {
                                 .show();
                     }
                 }).check();
+    }
+
+    private void buildLocationCallBack() {
+        locationCallback = new LocationCallback(){
+            @Override
+            public void onLocationResult(LocationResult locationResult){
+                super.onLocationResult(locationResult);
+
+                Common.current_location = locationResult.getLastLocation();
+
+                viewPager = findViewById(R.id.viewPager_weather);
+                setupViewPager(viewPager);
+                tabLayout = findViewById(R.id.tabs_weather);
+                tabLayout.setupWithViewPager(viewPager);
+
+
+            }
+        };
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        AdapterWeather adapterWeather = new AdapterWeather(getSupportFragmentManager());
+        adapterWeather.addFragment(HoyWeatherFragment.getInstancia(), "Hoy");
+        viewPager.setAdapter(adapterWeather);
+    }
+
+    private void buildLocationRequest() {
+        locationRequest = new LocationRequest();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(5000);
+        locationRequest.setFastestInterval(3000);
+        locationRequest.setSmallestDisplacement(10.0f);
     }
 
 
