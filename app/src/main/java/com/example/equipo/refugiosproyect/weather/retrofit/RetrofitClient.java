@@ -10,7 +10,7 @@ public class RetrofitClient {
     public static Retrofit getInstancia(){
         if (instancia == null){
             instancia = new Retrofit.Builder()
-                    .baseUrl("https://samples.openweathermap.org/data/2.5/")
+                    .baseUrl("https://api.openweathermap.org/data/2.5/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();
