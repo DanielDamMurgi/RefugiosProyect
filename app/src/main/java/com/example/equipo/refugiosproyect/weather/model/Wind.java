@@ -4,7 +4,7 @@ public class Wind {
 
     //ATRIBUTOS
     private double speed;
-    private int deg;
+    private double deg;
 
     //CONSTRUCTOR
     public Wind() {
@@ -19,11 +19,11 @@ public class Wind {
         this.speed = speed;
     }
 
-    public int getDeg() {
-        return deg;
+    public double getDeg() {
+        return (int) deg;
     }
 
-    public void setDeg(int deg) {
+    public void setDeg(double deg) {
         this.deg = deg;
     }
 }

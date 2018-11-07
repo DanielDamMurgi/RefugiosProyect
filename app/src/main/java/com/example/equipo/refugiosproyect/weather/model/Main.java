@@ -4,12 +4,10 @@ public class Main {
 
     //ATRIBUTOS
     private double temp;
-    private double pressure;
+    private float pressure;
     private int humidity;
     private double temp_min;
     private double temp_max;
-    private double sea_level;
-    private double grnd_level;
 
     //CONTRUCTOR
 
@@ -17,6 +15,8 @@ public class Main {
     }
 
     //GETTERS Y SETTERS
+
+
     public double getTemp() {
         return temp;
     }
@@ -25,11 +25,11 @@ public class Main {
         this.temp = temp;
     }
 
-    public double getPressure() {
+    public float getPressure() {
         return pressure;
     }
 
-    public void setPressure(double pressure) {
+    public void setPressure(float pressure) {
         this.pressure = pressure;
     }
 
@@ -55,21 +55,5 @@ public class Main {
 
     public void setTemp_max(double temp_max) {
         this.temp_max = temp_max;
-    }
-
-    public double getSea_level() {
-        return sea_level;
-    }
-
-    public void setSea_level(double sea_level) {
-        this.sea_level = sea_level;
-    }
-
-    public double getGrnd_level() {
-        return grnd_level;
-    }
-
-    public void setGrnd_level(double grnd_level) {
-        this.grnd_level = grnd_level;
     }
 }
