@@ -37,6 +37,7 @@ public class HoyWeatherFragment extends Fragment {
     private ProgressBar loading_weather;
     private CompositeDisposable compositeDisposable;
     private IOpenWeatherMap mService;
+    private Boolean locat;
 
     //GETTERS Y SETTERS
     public static HoyWeatherFragment getInstancia() {
@@ -54,6 +55,14 @@ public class HoyWeatherFragment extends Fragment {
         Retrofit retrofit = RetrofitClient.getInstancia();
         mService = retrofit.create(IOpenWeatherMap.class);
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+       // compositeDisposable.clear();
+    }
+
+
 
     @Override
     public void onStop() {
@@ -82,14 +91,29 @@ public class HoyWeatherFragment extends Fragment {
         weather_panel = view.findViewById(R.id.panel_weather);
         loading_weather = view.findViewById(R.id.loading_weather);
 
+        locat = getActivity().getIntent().getExtras().getBoolean("locat");
+
         getWeatherInformation();
 
         return view;
     }
 
     private void getWeatherInformation() {
-        compositeDisposable.add(mService.getWeatherByLatLng(String.valueOf(Common.current_location.getLatitude()),
-                String.valueOf(Common.current_location.getLongitude()),
+
+        final String nombre, lat, lon;
+
+        if (locat){
+            nombre = getActivity().getIntent().getExtras().getString("nombreSierra");
+            lat = getActivity().getIntent().getExtras().getString("latitudSierra");
+            lon = getActivity().getIntent().getExtras().getString("longitudSierra");
+        }else {
+            lat = String.valueOf(Common.current_location.getLatitude());
+            lon =  String.valueOf(Common.current_location.getLongitude());
+            nombre = "";
+        }
+
+        compositeDisposable.add(mService.getWeatherByLatLng(lat,
+                lon,
                 Common.WEATHER_IP,"metric")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -102,9 +126,18 @@ public class HoyWeatherFragment extends Fragment {
                                 .append(weatherResult.getWeather().get(0).getIcon())
                                 .append(".png").toString()).into(imageView);
 
-                        txt_nombreSierra.setText(weatherResult.getName());
-                        txt_descripcion.setText(new StringBuilder("Weather in ")
-                        .append(weatherResult.getName()).toString());
+                        if (nombre.length() <= 0){
+                            txt_nombreSierra.setText(weatherResult.getName());
+                            txt_descripcion.setText(new StringBuilder("Weather in ")
+                                    .append(weatherResult.getName()).toString());
+                            txt_geo_coord.setText(new StringBuilder("").append(weatherResult.getCoord().toString()).append("").toString());
+                        }else{
+                            txt_nombreSierra.setText(nombre);
+                            txt_descripcion.setText(new StringBuilder("Weather in ")
+                                    .append(nombre));
+                            txt_geo_coord.setText(new StringBuilder("[").append(lat).append(',').append(lon).append(']').toString());
+                        }
+
                         txt_temperature.setText(new StringBuilder(
                                 String.valueOf(weatherResult.getMain().getTemp())).append("°C").toString());
                         txt_date_time.setText(Common.convertUnixToDate(weatherResult.getDt()));

@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 
 import com.example.equipo.refugiosproyect.clasesPrincipales.Usuario;
+import com.example.equipo.refugiosproyect.weather.WeatherActivity;
 
 import java.util.ArrayList;
 
@@ -213,9 +214,13 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Intent i;
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.clima) {
             // Handle the camera action
+            i = new Intent(this, WeatherActivity.class);
+            i.putExtra("locat",false);
+            startActivity(i);
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {

@@ -33,6 +33,7 @@ public class ForecastFragment extends Fragment {
     //ATRIBUTOS
     TextView txt_nombreSierra, txt_geo_coord;
     RecyclerView recyclerView;
+    private boolean locat;
 
     CompositeDisposable compositeDisposable;
     IOpenWeatherMap mService;
@@ -74,22 +75,37 @@ public class ForecastFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
 
+        locat = getActivity().getIntent().getExtras().getBoolean("locat");
+
         getForecastWeatherInformation();
 
         return view;
     }
 
     private void getForecastWeatherInformation() {
+
+        final String nombre, lat, lon;
+
+        if (locat){
+            nombre = getActivity().getIntent().getExtras().getString("nombreSierra");
+            lat = getActivity().getIntent().getExtras().getString("latitudSierra");
+            lon = getActivity().getIntent().getExtras().getString("longitudSierra");
+        }else {
+            lat = String.valueOf(Common.current_location.getLatitude());
+            lon =  String.valueOf(Common.current_location.getLongitude());
+            nombre = "";
+        }
+
         compositeDisposable.add(mService.getForecastWeatherByLatLng(
-                String.valueOf(Common.current_location.getLatitude()),
-                String.valueOf(Common.current_location.getLongitude()),
+                lat,
+                lon,
                 Common.WEATHER_IP, "metric")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<WeatherForecastResult>() {
                                @Override
                                public void accept(WeatherForecastResult weatherForecastResult) throws Exception {
-                                   displayForecastWeather(weatherForecastResult);
+                                   displayForecastWeather(weatherForecastResult, nombre, lat, lon);
                                }
                            }, new Consumer<Throwable>() {
                                @Override
@@ -100,9 +116,14 @@ public class ForecastFragment extends Fragment {
                 );
     }
 
-    private void displayForecastWeather(WeatherForecastResult weatherForecastResult) {
-        txt_nombreSierra.setText(new StringBuilder(weatherForecastResult.city.name));
-        txt_geo_coord.setText(new StringBuilder(weatherForecastResult.city.coord.toString()));
+    private void displayForecastWeather(WeatherForecastResult weatherForecastResult, String nombre, String lat, String lon) {
+        if (nombre.length() <= 0){
+            txt_nombreSierra.setText(new StringBuilder(weatherForecastResult.city.name));
+            txt_geo_coord.setText(new StringBuilder(weatherForecastResult.city.coord.toString()));
+        }else{
+            txt_nombreSierra.setText(new StringBuilder(nombre));
+            txt_geo_coord.setText(new StringBuilder("[").append(lat).append(',').append(lon).append(']').toString());
+        }
 
         AdapterWeatherForecast adapterWeatherForecast = new AdapterWeatherForecast(getContext(),weatherForecastResult);
         recyclerView.setAdapter(adapterWeatherForecast);

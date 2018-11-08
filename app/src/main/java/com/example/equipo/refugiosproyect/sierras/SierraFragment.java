@@ -122,6 +122,10 @@ public class SierraFragment extends Fragment implements View.OnClickListener, Fr
                 }*/
 
                 i = new Intent(getActivity(), WeatherActivity.class);
+                i.putExtra("locat",true);
+                i.putExtra("latitudSierra", sierra.getLatutud());
+                i.putExtra("longitudSierra", sierra.getLongitud());
+                i.putExtra("nombreSierra", sierra.getNombre());
                 startActivity(i);
                 break;
             default:
