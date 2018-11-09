@@ -41,7 +41,7 @@ public class PanelRefugioActivity extends AppCompatActivity{
         tabLayout.setupWithViewPager(viewPager);
 
     }
-
+    //TODO: TRADUCCIONES
     private void añadirTabs(ViewPager viewPager){
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.añadirFragmento(new InfoRefugioFragment(), "Información");
@@ -50,6 +50,7 @@ public class PanelRefugioActivity extends AppCompatActivity{
         RutasFragment.getIdRefugio(refugio);
         adapter.añadirFragmento(new FotosRefugioFragment(), "Fotos");
         FotosRefugioFragment.setId(refugio.getId());
+        adapter.añadirFragmento(new ComentariosFragment(), "Comentarios");
         viewPager.setAdapter(adapter);
     }
 
