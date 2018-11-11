@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.example.equipo.refugiosproyect.clasesPrincipales.Refugio;
 import com.example.equipo.refugiosproyect.R;
+import com.example.equipo.refugiosproyect.refugios.comentarios.ComentariosFragment;
 
 import java.util.ArrayList;
 import java.util.List;
