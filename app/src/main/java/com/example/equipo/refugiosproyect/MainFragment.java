@@ -38,7 +38,7 @@ public class MainFragment extends Fragment {
         super.onStart();
 
         progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Cargando sierras");
+        progressDialog.setMessage(getResources().getString(R.string.cargando_sierras));
 
         if (sierras.isEmpty()){
             progressDialog.show();

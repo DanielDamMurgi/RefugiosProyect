@@ -169,7 +169,7 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
-                android:id="@+id/cardView_mapaSierra"
+                android:id="@+id/cardView_climaSierra"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_columnWeight="1"
@@ -188,14 +188,14 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView_mapaSierra"
+                        android:id="@+id/imageView_climaSierra"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_weather_m"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                     <TextView
-                        android:id="@+id/textView_mapaSierra"
+                        android:id="@+id/textView_climaSierra"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/clima"

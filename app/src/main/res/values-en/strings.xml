@@ -35,4 +35,8 @@
     <string name="usuario_no_registrado">" User could not register"</string>
     <string name="rutas">Routes</string>
     <string name="comentarios">Comments</string>
+    <string name="mapa_refugios">Refuge map</string>
+    <string name="lista_refugios">Refuge list</string>
+    <string name="cargando_refugios">Loading refuges</string>
+    <string name="cargando_sierras">Loading sierra</string>
 </resources>

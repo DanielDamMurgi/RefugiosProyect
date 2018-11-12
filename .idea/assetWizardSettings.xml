@@ -34,8 +34,9 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
+                                      <entry key="backgroundColor" value="000000" />
                                       <entry key="iconShape" value="NONE" />
-                                      <entry key="imageAsset" value="C:\Users\Equipo\Desktop\windy-weather.png" />
+                                      <entry key="imageAsset" value="C:\Users\enriq\Desktop\list_icon.png" />
                                       <entry key="outputName" value="ic_weather_m" />
                                     </map>
                                   </option>

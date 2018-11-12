@@ -16,6 +16,7 @@ import com.example.equipo.refugiosproyect.clasesPrincipales.Refugio;
 import com.example.equipo.refugiosproyect.clasesPrincipales.Sierra;
 import com.example.equipo.refugiosproyect.R;
 import com.example.equipo.refugiosproyect.refugios.RefugioActivity;
+import com.example.equipo.refugiosproyect.refugios.RefugioPanelActivity;
 import com.example.equipo.refugiosproyect.weather.WeatherActivity;
 
 
@@ -28,11 +29,11 @@ import java.util.ArrayList;
 
 public class SierraFragment extends Fragment implements View.OnClickListener, FragmentManager.OnBackStackChangedListener {
 
-    private CardView infoCard, refugioCard, fotosCard, mapaCard;
+    //ATRIBUTOS
+    private CardView infoCard, refugioCard, fotosCard, climaCard;
     private Sierra sierra;
-    private ArrayList<Refugio> refugios = new ArrayList<>();
-    ActualizacionRefugio actualizacionRefugio;
 
+    //IMPLEMENTACION
     public SierraFragment() {
         // Required empty public constructor
     }
@@ -52,30 +53,12 @@ public class SierraFragment extends Fragment implements View.OnClickListener, Fr
         fotosCard = view.findViewById(R.id.cardView_fotosSierras);
         fotosCard.setOnClickListener(this);
 
-        mapaCard = view.findViewById(R.id.cardView_mapaSierra);
-        mapaCard.setOnClickListener(this);
+        climaCard = view.findViewById(R.id.cardView_climaSierra);
+        climaCard.setOnClickListener(this);
 
-
-            sierra = (Sierra) getActivity().getIntent().getExtras().getSerializable("sierra");
-
-
+        sierra = (Sierra) getActivity().getIntent().getExtras().getSerializable("sierra");
 
         return view;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (refugios.isEmpty() || sierra.getId() != refugios.get(0).getId_sierra()){
-
-            String consulta = "select * from refugio where id_sierra = "+sierra.getId();
-            new CargarRefugios(consulta).execute();
-
-            actualizacionRefugio=new ActualizacionRefugio();
-            actualizacionRefugio.execute();
-
-
-        }
     }
 
     @Override
@@ -92,14 +75,9 @@ public class SierraFragment extends Fragment implements View.OnClickListener, Fr
                 break;
 
             case R.id.cardView_refugioSierra:
-                if (refugios.isEmpty()){
-                    Toast.makeText(getContext(),"Cargando refugios",Toast.LENGTH_LONG).show();
-                }else {
-                    i = new Intent(getActivity(),RefugioActivity.class);
-                    i.putExtra("refugios",refugios);
+                    i = new Intent(getActivity(),RefugioPanelActivity.class);
+                    i.putExtra("sierra",sierra);
                     startActivity(i);
-                }
-
                 break;
 
             case R.id.cardView_fotosSierras:
@@ -108,19 +86,7 @@ public class SierraFragment extends Fragment implements View.OnClickListener, Fr
                 startActivity(i);
                 break;
 
-            case R.id.cardView_mapaSierra:
-                //TODO : pasar a refugios
-                /*if (refugios.isEmpty()){
-                    Toast.makeText(getContext(),"Cargando refugios",Toast.LENGTH_LONG).show();
-                }else {
-                    i = new Intent(getActivity(), MapsActivity.class);
-                    i.putExtra("latitudSierra", sierra.getLatutud());
-                    i.putExtra("longitudSierra", sierra.getLongitud());
-                    i.putExtra("nombreSierra", sierra.getNombre());
-                    i.putExtra("refugios", refugios);
-                    startActivity(i);
-                }*/
-
+            case R.id.cardView_climaSierra:
                 i = new Intent(getActivity(), WeatherActivity.class);
                 i.putExtra("locat",true);
                 i.putExtra("latitudSierra", sierra.getLatutud());
@@ -140,83 +106,5 @@ public class SierraFragment extends Fragment implements View.OnClickListener, Fr
 
     }
 
-    public class CargarRefugios extends AsyncTask<Void, Void, ResultSet> {
-        String consulta;
-        Connection connection;
-        Statement statement;
-        ResultSet resultSet;
 
-        public CargarRefugios(String consulta) {
-            this.consulta = consulta;
-        }
-
-        @Override
-        protected ResultSet doInBackground(Void... params) {
-            try {
-                connection = DriverManager.getConnection("jdbc:mysql://" + BBDD.getIp() + BBDD.getBd(), BBDD.getUsuario(), BBDD.getClave());
-                statement = connection.createStatement();
-                publishProgress();
-
-                resultSet = statement.executeQuery(consulta);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-            return resultSet;
-        }
-
-        @Override
-        protected void onPostExecute(ResultSet resultSet) {
-            super.onPostExecute(resultSet);
-
-
-            try {
-                while (resultSet.next()) {
-                    refugios.add(new Refugio(
-                            resultSet.getInt("id_refugio"),
-                            resultSet.getString("nombre"),
-                            resultSet.getString("info"),
-                            resultSet.getString("foto"),
-                            resultSet.getString("situacion"),
-                            resultSet.getString("altitud"),
-                            resultSet.getString("latitud"),
-                            resultSet.getString("longitud"),
-                            resultSet.getInt("id_sierra")
-                    ));
-                }
-
-
-                connection.close();
-                statement.cancel();
-                this.resultSet.close();
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-    }//FIN CARGARSIERRA
-
-    public class ActualizacionRefugio extends AsyncTask<Void, Void, Void> {
-
-        public ActualizacionRefugio() {
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            publishProgress();
-            return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... voids) {
-            super.onProgressUpdate();
-        }
-    }//Fin AsynTack
 }

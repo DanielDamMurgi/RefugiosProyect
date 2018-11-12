@@ -47,6 +47,10 @@
     <string name="usuario_no_registrado">Usuario no se pudo registrar</string>
     <string name="rutas">Rutas</string>
     <string name="comentarios">Comentarios</string>
+    <string name="mapa_refugios">Mapa de refugios</string>
+    <string name="lista_refugios">Lista de refugios</string>
+    <string name="cargando_refugios">Cargando refugios</string>
+    <string name="cargando_sierras">Cargando sierras</string>
 
 
 </resources>
