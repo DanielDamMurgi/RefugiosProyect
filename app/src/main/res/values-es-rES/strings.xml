@@ -27,4 +27,12 @@
     <string name="error_cambiar_nombre">Error al cambiar nombre</string>
     <string name="clave_cambiada">Contraseña cambiada</string>
     <string name="error_cambiar_clave">Error al cambiar contraseña</string>
+    <string name="comentario">Escribe un comentario</string>
+    <string name="enviar">Enviar</string>
+    <string name="clima">Clima</string>
+    <string name="usuario_no_insertar">Usuario no se pudo insertar</string>
+    <string name="usuario_registrado">Usuario registrado con éxito</string>
+    <string name="usuario_no_registrado">Usuario no se pudo registrar</string>
+    <string name="rutas">Rutas</string>
+    <string name="comentarios">Comentarios</string>
 </resources>

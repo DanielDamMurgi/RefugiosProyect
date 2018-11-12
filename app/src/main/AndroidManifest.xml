@@ -7,11 +7,11 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality. 
     -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" /> -->
 
+    <!-- <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" /> -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -43,7 +43,7 @@
             android:name=".refugios.RefugioActivity"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
-            android:name=".refugios.PanelRefugioActivity"
+            android:name=".refugios.RefugioPagerActivity"
             android:parentActivityName=".refugios.RefugioActivity"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
@@ -82,8 +82,10 @@
         <activity
             android:name=".CambiarNombreActivity"
             android:theme="@style/AppThemeNoActionBar" />
-        <activity android:name=".weather.WeatherActivity"
-            android:theme="@style/AppThemeNoActionBar"></activity>
+        <activity
+            android:name=".weather.WeatherActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity android:name=".refugios.RefugioPanelActivity"></activity>
     </application>
 
 </manifest>

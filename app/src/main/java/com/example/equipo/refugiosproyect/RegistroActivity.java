@@ -66,7 +66,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
-//TODO: TRADUCCIONES
+
     //Return true si la contraseña es valida
     private boolean validarContraseña() {
         clave1 = etClave1.getText().toString().trim();
@@ -141,7 +141,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                 result = statement.executeUpdate(consulta);
 
             } catch (SQLException e) {
-                showToast("Usuario No se pudo insertar.");
+                showToast(getResources().getString(R.string.usuario_no_insertar));
                 e.printStackTrace();
             }
             return result;
@@ -152,13 +152,13 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
             super.onPostExecute(resultSet);
 
             if (resultSet == 1) {
-                showToast( "Usuario Registrado con éxito.");
+                showToast(getResources().getString(R.string.usuario_registrado));
 
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
 
             } else {
-                showToast( "Usuario No se pudo registrar.");
+                showToast(getResources().getString(R.string.usuario_no_registrado));
             }
 
             try {

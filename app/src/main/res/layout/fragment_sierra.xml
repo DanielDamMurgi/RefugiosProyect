@@ -190,7 +190,7 @@
                     <ImageView
                         android:id="@+id/imageView_mapaSierra"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_mapas"
+                        android:src="@drawable/ic_weather_m"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -198,7 +198,7 @@
                         android:id="@+id/textView_mapaSierra"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mapa"
+                        android:text="@string/clima"
                         android:textSize="18dp"
                         android:textStyle="bold"
                         android:textAlignment="center"

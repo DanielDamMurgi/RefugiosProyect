@@ -16,7 +16,7 @@ import com.example.equipo.refugiosproyect.refugios.comentarios.ComentariosFragme
 import java.util.ArrayList;
 import java.util.List;
 
-public class PanelRefugioActivity extends AppCompatActivity{
+public class RefugioPagerActivity extends AppCompatActivity{
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -25,7 +25,7 @@ public class PanelRefugioActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_panel_refugio);
+        setContentView(R.layout.activity_refugio_pager);
 
         refugio = (Refugio) getIntent().getExtras().getSerializable("refugio");
 
@@ -42,16 +42,17 @@ public class PanelRefugioActivity extends AppCompatActivity{
         tabLayout.setupWithViewPager(viewPager);
 
     }
-    //TODO: TRADUCCIONES
+
     private void añadirTabs(ViewPager viewPager){
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.añadirFragmento(new InfoRefugioFragment(), "Información");
+        adapter.añadirFragmento(new InfoRefugioFragment(), getResources().getString(R.string.informacion));
         InfoRefugioFragment.setInfo(refugio.getInfo());
-        adapter.añadirFragmento(new RutasFragment(),"Rutas");
+        adapter.añadirFragmento(new RutasFragment(),getResources().getString(R.string.rutas));
         RutasFragment.getIdRefugio(refugio);
-        adapter.añadirFragmento(new FotosRefugioFragment(), "Fotos");
+        adapter.añadirFragmento(new FotosRefugioFragment(), getResources().getString(R.string.fotos));
         FotosRefugioFragment.setId(refugio.getId());
-        adapter.añadirFragmento(new ComentariosFragment(), "Comentarios");
+        adapter.añadirFragmento(new ComentariosFragment(), getResources().getString(R.string.comentarios));
+        ComentariosFragment.setId(refugio.getId());
         viewPager.setAdapter(adapter);
     }
 

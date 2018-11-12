@@ -7,7 +7,7 @@
         <item
             android:id="@+id/clima"
             android:icon="@drawable/ic_weather"
-            android:title="Clima" />
+            android:title="@string/clima" />
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"

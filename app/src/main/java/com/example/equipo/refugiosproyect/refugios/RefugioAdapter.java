@@ -68,7 +68,7 @@ class RefugioAdapter extends RecyclerView.Adapter<RefugioAdapter.ViewHolder> imp
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(context,PanelRefugioActivity.class);
+                intent = new Intent(context,RefugioPagerActivity.class);
                 refugio = refugios.get(position);
                 intent.putExtra("refugio",refugio);
                 context.startActivity(intent);
