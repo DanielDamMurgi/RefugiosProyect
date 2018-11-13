@@ -36,8 +36,8 @@
                                       <entry key="assetType" value="IMAGE" />
                                       <entry key="backgroundColor" value="000000" />
                                       <entry key="iconShape" value="NONE" />
-                                      <entry key="imageAsset" value="C:\Users\enriq\Desktop\list_icon.png" />
-                                      <entry key="outputName" value="ic_weather_m" />
+                                      <entry key="imageAsset" value="C:\Users\Equipo\Desktop\icon.png" />
+                                      <entry key="outputName" value="ic_list" />
                                     </map>
                                   </option>
                                 </PersistentState>
