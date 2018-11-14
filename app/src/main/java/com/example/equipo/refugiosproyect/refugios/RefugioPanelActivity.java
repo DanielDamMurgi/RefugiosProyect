@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.equipo.refugiosproyect.R;
 import com.example.equipo.refugiosproyect.clasesPrincipales.BBDD;
@@ -27,14 +28,15 @@ public class RefugioPanelActivity extends AppCompatActivity implements View.OnCl
     private CardView cv_listaRefugios, cv_mapaRefugios;
     private ArrayList<Refugio> refugios = new ArrayList<>();
     private Sierra sierra;
-    ActualizacionRefugio actualizacionRefugio;
-    private ProgressDialog progressDialog;
+    private ProgressBar loading_refugios;
 
     //IMPLEMENTACION
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_refugio_panel);
+
+        loading_refugios = findViewById(R.id.loading_refugios);
 
         cv_listaRefugios = findViewById(R.id.cv_listaRefugios);
         cv_listaRefugios.setOnClickListener(this);
@@ -47,18 +49,18 @@ public class RefugioPanelActivity extends AppCompatActivity implements View.OnCl
     protected void onStart() {
         super.onStart();
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage(getResources().getString(R.string.cargando_refugios));
 
         sierra = (Sierra) getIntent().getExtras().getSerializable("sierra");
 
         if (refugios.isEmpty() || sierra.getId() != refugios.get(0).getId_sierra()){
-            progressDialog.show();
+            cv_listaRefugios.setVisibility(View.GONE);
+            cv_mapaRefugios.setVisibility(View.GONE);
             String consulta = "select * from refugio where id_sierra = "+sierra.getId();
-            new CargarRefugios(consulta,progressDialog).execute();
-
-            actualizacionRefugio=new ActualizacionRefugio();
-            actualizacionRefugio.execute();
+            new CargarRefugios(consulta).execute();
+        }else{
+            loading_refugios.setVisibility(View.GONE);
+            cv_listaRefugios.setVisibility(View.VISIBLE);
+            cv_mapaRefugios.setVisibility(View.VISIBLE);
         }
     }
 
@@ -86,15 +88,14 @@ public class RefugioPanelActivity extends AppCompatActivity implements View.OnCl
     }
 
     public class CargarRefugios extends AsyncTask<Void, Void, ResultSet> {
-        android.app.AlertDialog dialog;
+
         String consulta;
         Connection connection;
         Statement statement;
         ResultSet resultSet;
 
-        public CargarRefugios(String consulta, ProgressDialog progressDialog) {
+        public CargarRefugios(String consulta) {
             this.consulta = consulta;
-            this.dialog = progressDialog;
         }
 
         @Override
@@ -140,32 +141,12 @@ public class RefugioPanelActivity extends AppCompatActivity implements View.OnCl
                 e.printStackTrace();
             }
 
-            dialog.dismiss();
+            loading_refugios.setVisibility(View.GONE);
+            cv_listaRefugios.setVisibility(View.VISIBLE);
+            cv_mapaRefugios.setVisibility(View.VISIBLE);
+
         }
 
     }//FIN CARGARSIERRA
-
-    public class ActualizacionRefugio extends AsyncTask<Void, Void, Void> {
-
-        public ActualizacionRefugio() {
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            publishProgress();
-            return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... voids) {
-            super.onProgressUpdate();
-            progressDialog.dismiss();
-        }
-    }//Fin AsynTack
 
 }

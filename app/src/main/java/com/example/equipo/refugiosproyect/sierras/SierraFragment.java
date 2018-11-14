@@ -9,6 +9,7 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.equipo.refugiosproyect.clasesPrincipales.BBDD;
@@ -18,6 +19,7 @@ import com.example.equipo.refugiosproyect.R;
 import com.example.equipo.refugiosproyect.refugios.RefugioActivity;
 import com.example.equipo.refugiosproyect.refugios.RefugioPanelActivity;
 import com.example.equipo.refugiosproyect.weather.WeatherActivity;
+import com.squareup.picasso.Picasso;
 
 
 import java.sql.DriverManager;
@@ -32,6 +34,7 @@ public class SierraFragment extends Fragment implements View.OnClickListener, Fr
     //ATRIBUTOS
     private CardView infoCard, refugioCard, fotosCard, climaCard;
     private Sierra sierra;
+    private ImageView imagen;
 
     //IMPLEMENTACION
     public SierraFragment() {
@@ -57,6 +60,10 @@ public class SierraFragment extends Fragment implements View.OnClickListener, Fr
         climaCard.setOnClickListener(this);
 
         sierra = (Sierra) getActivity().getIntent().getExtras().getSerializable("sierra");
+
+        imagen = view.findViewById(R.id.iv_sierraPanel);
+
+        Picasso.with(getActivity()).load(sierra.getFoto().trim()).into(imagen);
 
         return view;
     }
