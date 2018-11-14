@@ -37,6 +37,10 @@ public class MainFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
+        if (!LiveData.getSierras().isEmpty()){
+           sierras = LiveData.getSierras();
+        }
+
         if (sierras.isEmpty()){
             String consulta = "select * from sierra";
             new CargarSierras(consulta).execute();
@@ -45,6 +49,14 @@ public class MainFragment extends Fragment {
             loading_sierra.setVisibility(View.GONE);
             lanzarAdapter();
         }
+    }
+
+    @Override
+    public void onStop() {
+        if (!sierras.isEmpty()){
+            LiveData.setSierras(sierras);
+        }
+        super.onStop();
     }
 
     @Override
