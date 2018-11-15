@@ -9,6 +9,7 @@ import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.example.equipo.refugiosproyect.LiveData;
 import com.example.equipo.refugiosproyect.R;
 import com.example.equipo.refugiosproyect.clasesPrincipales.BBDD;
 import com.example.equipo.refugiosproyect.clasesPrincipales.Refugio;
@@ -49,8 +50,11 @@ public class RefugioPanelActivity extends AppCompatActivity implements View.OnCl
     protected void onStart() {
         super.onStart();
 
-
         sierra = (Sierra) getIntent().getExtras().getSerializable("sierra");
+
+        if (!LiveData.getRefugios().isEmpty() && LiveData.getRefugios().get(0).getId_sierra() == sierra.getId()){
+            refugios = LiveData.getRefugios();
+        }
 
         if (refugios.isEmpty() || sierra.getId() != refugios.get(0).getId_sierra()){
             cv_listaRefugios.setVisibility(View.GONE);
@@ -62,6 +66,14 @@ public class RefugioPanelActivity extends AppCompatActivity implements View.OnCl
             cv_listaRefugios.setVisibility(View.VISIBLE);
             cv_mapaRefugios.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    protected void onStop() {
+        if (!refugios.isEmpty()){
+            LiveData.setRefugios(refugios);
+        }
+        super.onStop();
     }
 
     @Override
