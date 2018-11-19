@@ -11,11 +11,13 @@ import android.widget.TextView;
 import com.example.equipo.refugiosproyect.R;
 import com.example.equipo.refugiosproyect.clasesPrincipales.Mensaje;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class AdapterMensaje extends RecyclerView.Adapter<AdapterMensaje.ViewHolder> {
 
-    private ArrayList<Mensaje> mensajes = new ArrayList<>();
+    private ArrayList<MensajeRecibir> mensajes = new ArrayList<>();
     private Context context;
 
     public AdapterMensaje(Context context) {
@@ -35,7 +37,11 @@ public class AdapterMensaje extends RecyclerView.Adapter<AdapterMensaje.ViewHold
 
         holder.nombre.setText(mensajes.get(position).getNombre());
         holder.mensaje.setText(mensajes.get(position).getMensaje());
-        holder.hora.setText(mensajes.get(position).getHora());
+
+        long codigoHora = mensajes.get(position).getHora();
+        Date d = new Date(codigoHora);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm     dd/MM/yyyy");
+        holder.hora.setText(simpleDateFormat.format(d));
 
     }
 
@@ -44,7 +50,7 @@ public class AdapterMensaje extends RecyclerView.Adapter<AdapterMensaje.ViewHold
         return mensajes.size();
     }
 
-    public void addMensaje(Mensaje m){
+    public void addMensaje(MensajeRecibir m){
         mensajes.add(m);
         notifyItemInserted(mensajes.size());
     }

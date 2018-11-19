@@ -28,6 +28,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -96,7 +97,7 @@ public class ComentariosFragment extends Fragment {
         btn_enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                databaseReference.push().setValue(new Mensaje(txt_mensaje.getText().toString(),MainActivity.usuarios.get(0).getEmail(),MainActivity.usuarios.get(0).getNombre(),"1","00:00"));
+                databaseReference.push().setValue(new MensajeEnviar(txt_mensaje.getText().toString(),MainActivity.usuarios.get(0).getEmail(),MainActivity.usuarios.get(0).getNombre(),"1",ServerValue.TIMESTAMP));
             }
         });
 
@@ -121,8 +122,9 @@ public class ComentariosFragment extends Fragment {
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Mensaje m = dataSnapshot.getValue(Mensaje.class);
+                MensajeRecibir m = dataSnapshot.getValue(MensajeRecibir.class);
                 adapterMensaje.addMensaje(m);
+                txt_mensaje.setText("");
             }
 
             @Override
@@ -168,9 +170,9 @@ public class ComentariosFragment extends Fragment {
                 @Override
                 public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
                     //Uri uri = taskSnapshot
-                    storageReference.getDownloadUrl();
-                    Mensaje m = new Mensaje("",uri.toString(),"dani","2","00:00");
-                    databaseReference.push().setValue(m);
+                    //storageReference.getDownloadUrl();
+                    //MensajeEnviar m = new MensajeEnviar("",uri.toString(),"dani","2",ServerValue.TIMESTAMP);
+                    //databaseReference.push().setValue(m);
                 }
             });
         }
