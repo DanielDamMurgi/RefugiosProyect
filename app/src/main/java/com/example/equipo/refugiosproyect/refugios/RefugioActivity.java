@@ -1,22 +1,13 @@
 package com.example.equipo.refugiosproyect.refugios;
 
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.equipo.refugiosproyect.LiveData;
-import com.example.equipo.refugiosproyect.clasesPrincipales.BBDD;
 import com.example.equipo.refugiosproyect.clasesPrincipales.Refugio;
 import com.example.equipo.refugiosproyect.R;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 public class RefugioActivity extends AppCompatActivity {

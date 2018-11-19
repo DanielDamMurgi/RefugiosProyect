@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.equipo.refugiosproyect.clasesPrincipales.BBDD;
 
+import com.example.equipo.refugiosproyect.clasesPrincipales.BBDD;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

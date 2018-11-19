@@ -1,6 +1,5 @@
 package com.example.equipo.refugiosproyect.refugios;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;

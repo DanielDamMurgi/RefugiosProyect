@@ -1,7 +1,6 @@
 package com.example.equipo.refugiosproyect.sierras;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,24 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.example.equipo.refugiosproyect.clasesPrincipales.BBDD;
-import com.example.equipo.refugiosproyect.clasesPrincipales.Refugio;
 import com.example.equipo.refugiosproyect.clasesPrincipales.Sierra;
 import com.example.equipo.refugiosproyect.R;
-import com.example.equipo.refugiosproyect.refugios.RefugioActivity;
 import com.example.equipo.refugiosproyect.refugios.RefugioPanelActivity;
 import com.example.equipo.refugiosproyect.weather.WeatherActivity;
 import com.squareup.picasso.Picasso;
-
-
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Connection;
-import java.util.ArrayList;
 
 public class SierraFragment extends Fragment implements View.OnClickListener, FragmentManager.OnBackStackChangedListener {
 
