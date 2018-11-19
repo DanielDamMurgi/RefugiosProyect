@@ -31,13 +31,26 @@
                             <entry key="launcherLegacy">
                               <value>
                                 <PersistentState>
+                                  <option name="children">
+                                    <map>
+                                      <entry key="image">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="paddingPercent" value="5" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                    </map>
+                                  </option>
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="backgroundColor" value="000000" />
-                                      <entry key="iconShape" value="NONE" />
-                                      <entry key="imageAsset" value="C:\Users\enriq\Desktop\list_icon.png" />
-                                      <entry key="outputName" value="ic_weather_m" />
+                                      <entry key="imageAsset" value="C:\Users\enriq\Desktop\icon.png" />
+                                      <entry key="outputName" value="ic_principal" />
                                     </map>
                                   </option>
                                 </PersistentState>
