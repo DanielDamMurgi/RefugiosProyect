@@ -54,10 +54,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()){
             case R.id.cardView_login_LA:
                 if (!validarEmail(etCorreo.getText().toString().trim())){
-                    etCorreo.setError("Email no válido");
+                    etCorreo.setError(getResources().getString(R.string.correo_no_valido));
                     etCorreo.requestFocus();
-                }else if (!ComprobarClave()){
-                    etClave.setError("Inserta la contraseña");
+                }else if (!comprobarClave()){
+                    etClave.setError(getResources().getString(R.string.insertar_clave));
                     etClave.requestFocus();
                 }else{
                     String consulta = "select * from usuario where correo='"+correo+"' and clave='"+clave+"'";
@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    //Retturn true si el correo es valido
+    //Return true si el correo es valido
     private boolean validarEmail(String email) {
         correo = email;
         String emailPattern = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return matcher.matches();
     }
 
-    private boolean ComprobarClave() {
+    private boolean comprobarClave() {
         clave = etClave.getText().toString().trim();
         if (clave.length() == 0){
             return false;
@@ -87,7 +87,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return true;
         }
     }
-
 
     public class LoginUsuario extends AsyncTask<Void,Void,ResultSet>{
         String consulta;
@@ -105,19 +104,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 connection = DriverManager.getConnection("jdbc:mysql://" + BBDD.getIp() + BBDD.getBd(), BBDD.getUsuario(), BBDD.getClave());
                 statement = connection.createStatement();
                 publishProgress();
-
                 resultSet = statement.executeQuery(consulta);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
             return resultSet;
-        }
+        }// FIN doInBackGround
 
         @Override
         protected void onPostExecute(ResultSet resultSet) {
             super.onPostExecute(resultSet);
-
 
             try {
                 while (resultSet.next()) {
@@ -129,7 +125,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 this.resultSet.close();
 
                 if (usuario == null){
-                    Toast.makeText(getApplicationContext(),"Credenciales incorrectas",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),getResources().getString(R.string.credenciales_incorrectas),Toast.LENGTH_LONG).show();
                 }else{
                     login = true;
                     MainActivity.usuarios.add(usuario);
@@ -139,7 +135,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
-        }
-    }
-}
+        }//FIN onPostExecute
+    }// FIN CLASE LoginUsuario
+}// FIN CLASE PRINCIPAL
