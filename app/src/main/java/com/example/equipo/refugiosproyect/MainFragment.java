@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.example.equipo.refugiosproyect.clasesPrincipales.BBDD;
 import com.example.equipo.refugiosproyect.clasesPrincipales.Sierra;
@@ -26,8 +27,7 @@ public class MainFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager_sierras;
     private Sierra sierra;
     private ArrayList<Sierra> sierras = new ArrayList<>();
-    private ProgressDialog progressDialog;
-    ActualizacionSierra actualizacionSierra;
+    private ProgressBar loading_sierra;
 
     public MainFragment() {
         // Required empty public constructor
@@ -37,18 +37,26 @@ public class MainFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage(getResources().getString(R.string.cargando_sierras));
+        if (!LiveData.getSierras().isEmpty()){
+           sierras = LiveData.getSierras();
+        }
 
         if (sierras.isEmpty()){
-            progressDialog.show();
             String consulta = "select * from sierra";
-            new CargarSierras(consulta,progressDialog).execute();
-            actualizacionSierra = new ActualizacionSierra();
-            actualizacionSierra.execute();
+            new CargarSierras(consulta).execute();
         }else{
+            mRecyclerView_sierras.setVisibility(View.VISIBLE);
+            loading_sierra.setVisibility(View.GONE);
             lanzarAdapter();
         }
+    }
+
+    @Override
+    public void onStop() {
+        if (!sierras.isEmpty()){
+            LiveData.setSierras(sierras);
+        }
+        super.onStop();
     }
 
     @Override
@@ -56,6 +64,8 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
+
+        loading_sierra = view.findViewById(R.id.loading_sierras);
         mRecyclerView_sierras = view.findViewById(R.id.recyclerView_sierras);
 
         mLayoutManager_sierras = new LinearLayoutManager(view.getContext());
@@ -71,15 +81,13 @@ public class MainFragment extends Fragment {
     }
 
     public class CargarSierras extends AsyncTask<Void, Void, ResultSet> {
-        android.app.AlertDialog dialog;
         String consulta;
         Connection connection;
         Statement statement;
         ResultSet resultSet;
 
-        public CargarSierras(String consulta, ProgressDialog dialog) {
+        public CargarSierras(String consulta) {
             this.consulta = consulta;
-            this.dialog = dialog;
         }
 
         @Override
@@ -118,36 +126,15 @@ public class MainFragment extends Fragment {
                 connection.close();
                 statement.cancel();
                 this.resultSet.close();
-//
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            dialog.dismiss();
+
+            mRecyclerView_sierras.setVisibility(View.VISIBLE);
+            loading_sierra.setVisibility(View.GONE);
 
         }
 
     }//FIN CARGARSIERRA
-
-    public class ActualizacionSierra extends AsyncTask<Void, Void, Void> {
-
-        public ActualizacionSierra() {
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            publishProgress();
-            return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... voids) {
-            super.onProgressUpdate();
-            progressDialog.dismiss();
-        }
-    }//Fin AsynTack
 }

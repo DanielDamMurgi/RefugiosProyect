@@ -38,7 +38,6 @@ public class RutasFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_rutas, container, false);
 
-        //datos();
         rv_rutas = view.findViewById(R.id.rv_rutas);
         lm_rutas = new LinearLayoutManager(getActivity());
 
@@ -75,12 +74,6 @@ public class RutasFragment extends Fragment {
         rv_rutas.setLayoutManager(lm_rutas);
         rv_rutas.setAdapter(adapter);
     }
-
-   /* private void datos(){
-        rutas = new ArrayList<>();
-        rutas.add(new Ruta("1","Abrucena - Ubeire",R.drawable.sierra_nevada,R.raw.sierra_evada));
-        rutas.add(new Ruta("1","jayena - El bacal",R.drawable.sierra_nevada,R.raw.jayena));
-    }*/
 
     public class CargarRutas extends AsyncTask<Void, Void, ResultSet> {
         String consulta;
