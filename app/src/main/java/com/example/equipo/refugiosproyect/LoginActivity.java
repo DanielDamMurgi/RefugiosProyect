@@ -22,13 +22,14 @@ import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
+    //ATRIBUTOS
     private CardView cv;
     private static boolean login=false;
     public static Usuario usuario;
     private EditText etCorreo, etClave;
     private String correo,clave;
 
-
+    //GETTERS Y SETTERS
     public static boolean isLogin() {
         return login;
     }
@@ -37,6 +38,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         LoginActivity.login = login;
     }
 
+    //IMPLEMENTACION
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
