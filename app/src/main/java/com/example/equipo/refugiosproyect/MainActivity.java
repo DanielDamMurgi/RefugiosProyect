@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity
             String correo = preferences.getString("correo","");
             String nombre = preferences.getString("nombre","");
             String clave = preferences.getString("clave","");
+            usuarios.clear();
             usuarios.add(new Usuario(id,correo,nombre,clave));
         }
 

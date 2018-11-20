@@ -104,8 +104,7 @@ public class CambiarClaveActivity extends AppCompatActivity implements View.OnCl
                 etClaveAntigua.setText("");
                 etClaveNueva.setText("");
                 etClaveNuevaR.setText("");
-                Intent intent = new Intent(this,PanelActivity.class);
-                startActivity(intent);
+                CambiarClaveActivity.super.finish();
                 break;
             default:
                 break;
@@ -134,7 +133,6 @@ public class CambiarClaveActivity extends AppCompatActivity implements View.OnCl
                 result = statement.executeUpdate(consulta);
 
             } catch (SQLException e) {
-                //showToast("Usuario No se pudo insertar.");
                 e.printStackTrace();
             }
             return result;

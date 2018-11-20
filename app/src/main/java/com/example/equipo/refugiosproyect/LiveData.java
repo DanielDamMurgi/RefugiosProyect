@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel;
 
 import com.example.equipo.refugiosproyect.clasesPrincipales.Refugio;
 import com.example.equipo.refugiosproyect.clasesPrincipales.Sierra;
+import com.example.equipo.refugiosproyect.clasesPrincipales.Usuario;
 
 import java.util.ArrayList;
 
@@ -27,4 +28,5 @@ public class LiveData extends ViewModel {
     public static void setRefugios(ArrayList<Refugio> refugios) {
         LiveData.refugios = refugios;
     }
+
 }

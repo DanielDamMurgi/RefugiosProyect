@@ -24,11 +24,11 @@ public class PanelActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_panel);
 
-        tv_Nombre = findViewById(R.id.tvNombreUsu);
+        //tv_Nombre = findViewById(R.id.tvNombreUsu);
 
         usuario = (ArrayList<Usuario>) getIntent().getSerializableExtra("usuarios");
 
-        tv_Nombre.setText(usuario.get(0).getNombre());
+        //tv_Nombre.setText(usuario.get(0).getNombre());
 
         cv_cambiarClave = findViewById(R.id.cv_cambiarClave);
         cv_cambiarNombre = findViewById(R.id.cv_cambiarNombre);
@@ -65,8 +65,7 @@ public class PanelActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.cv_cerrarSesion:
                 cerrarSesion();
-                i = new Intent(getApplicationContext(),MainActivity.class);
-                startActivity(i);
+                PanelActivity.super.finish();
                 break;
 
             default:

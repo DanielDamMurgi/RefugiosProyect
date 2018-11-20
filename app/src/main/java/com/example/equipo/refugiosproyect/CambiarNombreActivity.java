@@ -61,8 +61,7 @@ public class CambiarNombreActivity extends AppCompatActivity implements View.OnC
                 break;
             case R.id.cv_cancelarNombre:
                 etNombre.setText("");
-                Intent intent = new Intent(this, PanelActivity.class);
-                startActivity(intent);
+                CambiarNombreActivity.super.finish();
                 break;
         }
     }
@@ -89,7 +88,6 @@ public class CambiarNombreActivity extends AppCompatActivity implements View.OnC
                 result = statement.executeUpdate(consulta);
 
             } catch (SQLException e) {
-                //showToast("Usuario No se pudo insertar.");
                 e.printStackTrace();
             }
             return result;
@@ -111,11 +109,11 @@ public class CambiarNombreActivity extends AppCompatActivity implements View.OnC
 
                 editor.commit();
 
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+                CambiarNombreActivity.super.finish();
 
             } else {
                 showToast( getResources().getString(R.string.error_cambiar_nombre));
+                CambiarNombreActivity.super.finish();
             }
 
             try {
@@ -125,8 +123,6 @@ public class CambiarNombreActivity extends AppCompatActivity implements View.OnC
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
-            //dialog.dismiss();
         }
     }//Fin AsynTack
 
