@@ -143,8 +143,6 @@ public class MainActivity extends AppCompatActivity
                 public void onClick(View v) {
                     usuarios.clear();
                     LoginActivity.setLogin(false);
-
-                    //limpiarPreferences();
                     ActualizarEstado(LoginActivity.isLogin(), context);
 
                 }

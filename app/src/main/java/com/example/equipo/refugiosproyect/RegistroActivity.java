@@ -22,18 +22,14 @@ import java.util.regex.Pattern;
 
 public class RegistroActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Operaciones operaciones;
     private CardView cardView;
     private EditText etCorreo, etNombre, etClave1, etClave2;
     private String correo, nombre, clave1, clave2;
-    AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
-
-        //dialog  = new SpotsDialog(this,"Insertando cliente...");
 
         cardView = findViewById(R.id.cardView_registrar_RA);
         etCorreo = findViewById(R.id.editText_emailReg);
@@ -48,7 +44,6 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
 
     private boolean validarNombre(String nombre) {
         if (nombre.length()<=0) {
-            //Toast.makeText(this, "Inserta el nombre",Toast.LENGTH_LONG).show();
             return false;
         } else {
             this.nombre = nombre;
@@ -111,21 +106,21 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                             + "VALUES ('" + correo + "', '" + nombre + "', "
                             + "'" + clave1 + "');";
 
-                    new registrarUsuario(insert).execute();
+                    new RegistrarUsuario(insert).execute();
 
                     RegistroActivity.super.finish();
                 }
                 break;
         }
-    }
+    }//FIN ONCLICK
 
-    public class registrarUsuario extends AsyncTask<Object, Object, Integer> {
+    public class RegistrarUsuario extends AsyncTask<Object, Object, Integer> {
 
         String consulta;
         Connection connection;
         Statement statement;
 
-        public registrarUsuario(String consulta) {
+        public RegistrarUsuario(String consulta) {
             this.consulta = consulta;
 
         }

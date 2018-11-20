@@ -103,7 +103,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         @Override
         protected ResultSet doInBackground(Void... voids) {
             try {
-                connection = DriverManager.getConnection("jdbc:mysql://" + BBDD.getIp() + BBDD.getBd(), BBDD.getUsuario(), BBDD.getClave());
+                connection = DriverManager.getConnection("jdbc:mysql://" + BBDD.getIp() + BBDD.getBd(),
+                        BBDD.getUsuario(), BBDD.getClave());
                 statement = connection.createStatement();
                 publishProgress();
                 resultSet = statement.executeQuery(consulta);
