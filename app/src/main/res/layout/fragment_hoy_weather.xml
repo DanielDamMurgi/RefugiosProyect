@@ -7,6 +7,8 @@
     android:gravity="center_horizontal"
     tools:context=".weather.HoyWeatherFragment">
 
+    <!-- TODO: Landscape de el tiempo -->
+
     <LinearLayout
         android:id="@+id/panel_weather"
         android:orientation="vertical"

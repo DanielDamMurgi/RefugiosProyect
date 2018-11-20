@@ -48,7 +48,8 @@ public class CambiarNombreActivity extends AppCompatActivity implements View.OnC
         if (nombre.length() <= 0){
             etNombre.setError(getResources().getString(R.string.inserta_nombre));
         }else {
-            String consulta="update usuario set nombre = '"+nombre+"' where id_usu = "+MainActivity.usuarios.get(0).getId();
+            String consulta="update usuario set nombre = '"+nombre+"' where id_usu = "+
+                    MainActivity.usuarios.get(0).getId();
             new CambiarNombre(consulta).execute();
         }
     }

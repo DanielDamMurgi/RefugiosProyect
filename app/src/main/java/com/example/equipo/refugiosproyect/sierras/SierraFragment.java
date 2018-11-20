@@ -16,7 +16,7 @@ import com.example.equipo.refugiosproyect.refugios.RefugioPanelActivity;
 import com.example.equipo.refugiosproyect.weather.WeatherActivity;
 import com.squareup.picasso.Picasso;
 
-public class SierraFragment extends Fragment implements View.OnClickListener, FragmentManager.OnBackStackChangedListener {
+public class SierraFragment extends Fragment implements View.OnClickListener {
 
     //ATRIBUTOS
     private CardView infoCard, refugioCard, fotosCard, climaCard;
@@ -67,19 +67,16 @@ public class SierraFragment extends Fragment implements View.OnClickListener, Fr
                 i.putExtra("fotoSierra",sierra.getFoto());
                 startActivity(i);
                 break;
-
             case R.id.cardView_refugioSierra:
-                    i = new Intent(getActivity(),RefugioPanelActivity.class);
-                    i.putExtra("sierra",sierra);
-                    startActivity(i);
+                i = new Intent(getActivity(),RefugioPanelActivity.class);
+                i.putExtra("sierra",sierra);
+                startActivity(i);
                 break;
-
             case R.id.cardView_fotosSierras:
                 i = new Intent(getActivity(), FotosSierraActivity.class);
                 i.putExtra("idSierra",sierra.getId());
                 startActivity(i);
                 break;
-
             case R.id.cardView_climaSierra:
                 i = new Intent(getActivity(), WeatherActivity.class);
                 i.putExtra("locat",true);
@@ -94,11 +91,5 @@ public class SierraFragment extends Fragment implements View.OnClickListener, Fr
         }
 
     }
-
-    @Override
-    public void onBackStackChanged() {
-
-    }
-
 
 }
