@@ -57,14 +57,6 @@ public class HoyWeatherFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-       // compositeDisposable.clear();
-    }
-
-
-
-    @Override
     public void onStop() {
         compositeDisposable.clear();
         super.onStop();

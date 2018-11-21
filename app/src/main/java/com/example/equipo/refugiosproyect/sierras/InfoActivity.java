@@ -50,9 +50,6 @@ public class InfoActivity extends AppCompatActivity {
 
 
         setSupportActionBar(toolbar);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
 
         collapsingToolbarLayout = findViewById(R.id.collapsingToolbar_refugios);
         collapsingToolbarLayout.setTitle(nombre);
@@ -63,6 +60,5 @@ public class InfoActivity extends AppCompatActivity {
         Picasso.with(this).load(foto.replaceAll("file/d/","uc?export=download&id=")
                 .replace("/view","")).into(imagen);
 
-        //imagen.setImageResource(R.drawable.refugio_polarda);
     }
 }

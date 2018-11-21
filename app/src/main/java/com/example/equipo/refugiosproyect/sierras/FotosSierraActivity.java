@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.equipo.refugiosproyect.clasesPrincipales.BBDD;
 import com.example.equipo.refugiosproyect.clasesPrincipales.Imagen;
@@ -24,8 +26,7 @@ public class FotosSierraActivity extends AppCompatActivity {
     private ArrayList<Imagen> imagenesSierra;
     private int id_sierra;
     private RecyclerView recyclerView;
-    private ActualizacionFotoSierra actualizacionFotoSierra;
-    private ProgressDialog progressDialog;
+    private ProgressBar loadind_fotos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +35,12 @@ public class FotosSierraActivity extends AppCompatActivity {
 
         imagenesSierra = new ArrayList<>();
 
+        loadind_fotos = findViewById(R.id.loading_fotosSierra);
+
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,2);
         recyclerView = findViewById(R.id.rv_imagenesSierra);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
-
-        //cargarDatos();
 
     }
 
@@ -47,19 +48,18 @@ public class FotosSierraActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Cargando fotos");
-
         id_sierra = getIntent().getExtras().getInt("idSierra");
 
         if (imagenesSierra.isEmpty() || imagenesSierra.get(0).getId() != id_sierra){
+            loadind_fotos.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
             imagenesSierra.clear();
-            progressDialog.show();
             String consulta = "select distinct * from foto_sierra where id_sierra = "+id_sierra;
-            new CargarFotosSierras(consulta,progressDialog).execute();
-            actualizacionFotoSierra = new ActualizacionFotoSierra();
-            actualizacionFotoSierra.execute();
+            new CargarFotosSierras(consulta).execute();
+
         }else{
+            loadind_fotos.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
             lanzarAdapter();
         }
     }
@@ -74,11 +74,9 @@ public class FotosSierraActivity extends AppCompatActivity {
         Connection connection;
         Statement statement;
         ResultSet resultSet;
-        android.app.AlertDialog dialog;
 
-        public CargarFotosSierras(String consulta, ProgressDialog dialog) {
+        public CargarFotosSierras(String consulta) {
             this.consulta = consulta;
-            this.dialog = dialog;
         }
 
         @Override
@@ -120,32 +118,12 @@ public class FotosSierraActivity extends AppCompatActivity {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            dialog.dismiss();
+
+            loadind_fotos.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
 
         }
 
     }//FIN CARGARSIERRA
 
-    public class ActualizacionFotoSierra extends AsyncTask<Void, Void, Void> {
-
-        public ActualizacionFotoSierra() {
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            publishProgress();
-            return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... voids) {
-            super.onProgressUpdate();
-            progressDialog.dismiss();
-        }
-    }//Fin AsynTack
 }
