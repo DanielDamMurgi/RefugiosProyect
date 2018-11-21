@@ -39,7 +39,7 @@ public class MapsActivity extends FragmentActivity implements
         OnMapReadyCallback, LocationListener {
 
     //ATRIBUTOS
-    private LatLng sierraCoor, puntoPulsado;
+    private LatLng sierraCoor;
     private LocationManager manejador;
     private GoogleApiClient googleApiClient;
     private Criteria criteria;
@@ -113,8 +113,6 @@ public class MapsActivity extends FragmentActivity implements
         if (googleApiClient !=null){
             googleApiClient.connect();
         }
-
-
     }
 
     @Override
@@ -171,8 +169,7 @@ public class MapsActivity extends FragmentActivity implements
             mapa.getUiSettings().setZoomControlsEnabled(false);
             mapa.getUiSettings().setCompassEnabled(true);
         } else {
-            //Button btnMiPos=(Button) findViewById(R.id.button2);
-            //btnMiPos.setEnabled(false);
+
         }
 
         manejador.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2000000, 200, this);
@@ -184,21 +181,6 @@ public class MapsActivity extends FragmentActivity implements
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         }
-
-        //primera = false;
-
-//        mapa.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-//            @Override
-//            public void onMapClick(LatLng punto) {
-//                mapa.clear();
-//                añadirMarcadores(primera);
-//                mapa.addMarker(new MarkerOptions().position(punto)
-//                        .icon(BitmapDescriptorFactory
-//                                .defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
-//
-//                puntoPulsado = punto;
-//            }
-//        });
 
     }
 
@@ -216,7 +198,6 @@ public class MapsActivity extends FragmentActivity implements
                 .anchor(0.5f, 0.5f));
 
         marker.showInfoWindow();
-
     }
 
     private void añadirMarcadores(Boolean primera) throws IOException, XmlPullParserException {
