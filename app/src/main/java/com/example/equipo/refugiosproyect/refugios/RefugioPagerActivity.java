@@ -32,7 +32,7 @@ public class RefugioPagerActivity extends AppCompatActivity{
         Toolbar toolbar = findViewById(R.id.toolbar_panelRefugio);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(refugio.getNombre());
 
         viewPager = findViewById(R.id.viewpager_panelRefugio);

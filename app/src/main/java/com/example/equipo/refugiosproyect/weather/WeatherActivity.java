@@ -51,7 +51,7 @@ public class WeatherActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar_weather);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //PERMISOS
         Dexter.withActivity(this)
