@@ -45,7 +45,6 @@ class RutasAdapter extends RecyclerView.Adapter<RutasAdapter.ViewHolder> impleme
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
         Picasso.with(context).load(rutas.get(position).getImagen().trim()).into(holder.imageView);
-        //holder.imageView.setImageResource(rutas.get(position).getImagen());
         holder.textView.setText(rutas.get(position).getNombre());
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {

@@ -9,31 +9,30 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.equipo.refugiosproyect.R;
-import com.example.equipo.refugiosproyect.clasesPrincipales.Mensaje;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class AdapterMensaje extends RecyclerView.Adapter<AdapterMensaje.ViewHolder> {
+public class AdapterComentario extends RecyclerView.Adapter<AdapterComentario.ViewHolder> {
 
-    private ArrayList<MensajeRecibir> mensajes = new ArrayList<>();
+    private ArrayList<ComentarioRecibir> mensajes = new ArrayList<>();
     private Context context;
 
-    public AdapterMensaje(Context context) {
+    public AdapterComentario(Context context) {
         this.context = context;
     }
 
     @NonNull
     @Override
-    public AdapterMensaje.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterComentario.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.esqueleto_comentarios, parent, false);
 
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterMensaje.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterComentario.ViewHolder holder, int position) {
 
         holder.nombre.setText(mensajes.get(position).getNombre());
         holder.mensaje.setText(mensajes.get(position).getMensaje());
@@ -50,7 +49,7 @@ public class AdapterMensaje extends RecyclerView.Adapter<AdapterMensaje.ViewHold
         return mensajes.size();
     }
 
-    public void addMensaje(MensajeRecibir m){
+    public void addMensaje(ComentarioRecibir m){
         mensajes.add(m);
         notifyItemInserted(mensajes.size());
     }

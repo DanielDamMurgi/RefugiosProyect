@@ -2,33 +2,32 @@ package com.example.equipo.refugiosproyect.refugios.comentarios;
 
 import com.example.equipo.refugiosproyect.clasesPrincipales.Mensaje;
 
-import java.util.Map;
-
-public class MensajeEnviar extends Mensaje {
+public class ComentarioRecibir extends Mensaje {
 
     //ATRIBUTOS
-    private Map hora;
+    private long hora;
 
     //CONSTRUCTORES
-    public MensajeEnviar() {
+
+    public ComentarioRecibir() {
     }
 
-    public MensajeEnviar(Map hora) {
+    public ComentarioRecibir(long hora) {
         this.hora = hora;
     }
 
-    public MensajeEnviar(String mensaje, String correo, String nombre, String type_mensaje, Map hora) {
+    public ComentarioRecibir(String mensaje, String correo, String nombre, String type_mensaje, long hora) {
         super(mensaje, correo, nombre, type_mensaje);
         this.hora = hora;
     }
 
     //GETTERS Y SETTERS
 
-    public Map getHora() {
+    public long getHora() {
         return hora;
     }
 
-    public void setHora(Map hora) {
+    public void setHora(long hora) {
         this.hora = hora;
     }
 }

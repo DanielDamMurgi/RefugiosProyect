@@ -34,7 +34,7 @@ import java.io.IOException;
 public class MapaRutasActivity extends FragmentActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        OnMapReadyCallback, GoogleMap.OnMapClickListener, LocationListener {
+        OnMapReadyCallback, LocationListener {
 
     //ATRIBUTOS
     private LocationManager manejador;
@@ -44,11 +44,10 @@ public class MapaRutasActivity extends FragmentActivity implements
     private GoogleMap mapa;
     private KmlLayer layer = null;
     private String archivo;
-    private LatLng refugioLL,sierra;
+    private LatLng refugioLL, sierra;
     private Refugio refugio;
 
     //IMPLEMENTACION
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,14 +85,6 @@ public class MapaRutasActivity extends FragmentActivity implements
                 .addApi(Places.GEO_DATA_API)
                 .enableAutoManage(this, this)
                 .build();
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-
     }
 
     @Override
@@ -132,11 +123,6 @@ public class MapaRutasActivity extends FragmentActivity implements
     }
 
     @Override
-    public void onMapClick(LatLng latLng) {
-
-    }
-
-    @Override
     public void onMapReady(GoogleMap googleMap) {
         mapa = googleMap;
 
@@ -146,9 +132,6 @@ public class MapaRutasActivity extends FragmentActivity implements
             mapa.setMyLocationEnabled(true);
             mapa.getUiSettings().setZoomControlsEnabled(false);
             mapa.getUiSettings().setCompassEnabled(true);
-        } else {
-            //Button btnMiPos=(Button) findViewById(R.id.button2);
-            //btnMiPos.setEnabled(false);
         }
 
         manejador.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2000000, 200, this);
@@ -157,8 +140,6 @@ public class MapaRutasActivity extends FragmentActivity implements
         añadirMarcadores();
 
         añadirRuta();
-
-
     }
 
     private void añadirMarcadores() {
@@ -175,20 +156,18 @@ public class MapaRutasActivity extends FragmentActivity implements
         mapa.addMarker(new MarkerOptions().position(sierra).title("Sierra Nevada"));
         mapa.moveCamera(CameraUpdateFactory.newLatLng(refugioLL));
         mapa.animateCamera(CameraUpdateFactory.newLatLngZoom(refugioLL, 14));
-
-
     }
 
-        private void añadirRuta(){
+    private void añadirRuta() {
 
-            try {
-                layer = new KmlLayer(mapa, getResources().getIdentifier(archivo,
-                        "raw", getPackageName()), getApplicationContext());
-                layer.addLayerToMap();
-            } catch (XmlPullParserException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            layer = new KmlLayer(mapa, getResources().getIdentifier(archivo,
+                    "raw", getPackageName()), getApplicationContext());
+            layer.addLayerToMap();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

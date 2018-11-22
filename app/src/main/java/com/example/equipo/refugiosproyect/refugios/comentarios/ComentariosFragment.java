@@ -15,13 +15,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 
 import com.example.equipo.refugiosproyect.LoginActivity;
 import com.example.equipo.refugiosproyect.MainActivity;
-import com.example.equipo.refugiosproyect.MainFragment;
 import com.example.equipo.refugiosproyect.R;
-import com.example.equipo.refugiosproyect.clasesPrincipales.Mensaje;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -47,7 +44,7 @@ public class ComentariosFragment extends Fragment {
     private EditText txt_mensaje;
     private Button btn_enviar;
     private ImageButton btn_foto;
-    private AdapterMensaje adapterMensaje;
+    private AdapterComentario adapterMensaje;
     private static int id_refugio;
 
     private FirebaseDatabase database;
@@ -78,7 +75,7 @@ public class ComentariosFragment extends Fragment {
         databaseReference = database.getReference(String.valueOf(id_refugio)); //se guardan los mensajes
         storage = FirebaseStorage.getInstance();
 
-        adapterMensaje = new AdapterMensaje(getActivity());
+        adapterMensaje = new AdapterComentario(getActivity());
         LinearLayoutManager l = new LinearLayoutManager(getActivity());
         recyclerView_mensaje.setLayoutManager(l);
         recyclerView_mensaje.setAdapter(adapterMensaje);
@@ -97,7 +94,11 @@ public class ComentariosFragment extends Fragment {
         btn_enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                databaseReference.push().setValue(new MensajeEnviar(txt_mensaje.getText().toString(),MainActivity.usuarios.get(0).getEmail(),MainActivity.usuarios.get(0).getNombre(),"1",ServerValue.TIMESTAMP));
+                if (txt_mensaje.getText().length() > 0){
+                    databaseReference.push().setValue(new ComentarioEnviar(txt_mensaje.getText().toString(),
+                            MainActivity.usuarios.get(0).getEmail(),MainActivity.usuarios.get(0).getNombre(),
+                            "1",ServerValue.TIMESTAMP));
+                }
             }
         });
 
@@ -122,7 +123,7 @@ public class ComentariosFragment extends Fragment {
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                MensajeRecibir m = dataSnapshot.getValue(MensajeRecibir.class);
+                ComentarioRecibir m = dataSnapshot.getValue(ComentarioRecibir.class);
                 adapterMensaje.addMensaje(m);
                 txt_mensaje.setText("");
             }
@@ -171,7 +172,7 @@ public class ComentariosFragment extends Fragment {
                 public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
                     //Uri uri = taskSnapshot
                     //storageReference.getDownloadUrl();
-                    //MensajeEnviar m = new MensajeEnviar("",uri.toString(),"dani","2",ServerValue.TIMESTAMP);
+                    //ComentarioEnviar m = new ComentarioEnviar("",uri.toString(),"dani","2",ServerValue.TIMESTAMP);
                     //databaseReference.push().setValue(m);
                 }
             });
