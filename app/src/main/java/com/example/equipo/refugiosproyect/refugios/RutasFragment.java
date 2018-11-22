@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.equipo.refugiosproyect.LiveData;
 import com.example.equipo.refugiosproyect.clasesPrincipales.BBDD;
 import com.example.equipo.refugiosproyect.clasesPrincipales.Refugio;
 import com.example.equipo.refugiosproyect.clasesPrincipales.Ruta;
@@ -54,12 +55,15 @@ public class RutasFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
+        if (!LiveData.getRutas().isEmpty()){
+            rutas.clear();
+            rutas = LiveData.getRutas();
+        }
+
         if (rutas.isEmpty()){
             rutas.clear();
             String consulta = "select * from ruta where id_refugio = "+refugio.getId();
             new CargarRutas(consulta).execute();
-            //actualizacionSierra = new ActualizacionSierra();
-            //actualizacionSierra.execute();
         }else if(rutas.get(0).getId_refugio()!=refugio.getId()) {
             rutas.clear();
             String consulta = "select * from ruta where id_refugio = "+refugio.getId();
@@ -67,6 +71,12 @@ public class RutasFragment extends Fragment {
         }else{
             lanzarAdapter();
         }
+    }
+
+    @Override
+    public void onStop() {
+        LiveData.setRutas(rutas);
+        super.onStop();
     }
 
     public void lanzarAdapter() {
@@ -120,37 +130,12 @@ public class RutasFragment extends Fragment {
                 connection.close();
                 statement.cancel();
                 this.resultSet.close();
-//
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            //dialog.dismiss();
-
         }
 
     }//FIN CARGARSIERRA
-
-    public class ActualizacionSierra extends AsyncTask<Void, Void, Void> {
-
-        public ActualizacionSierra() {
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            publishProgress();
-            return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... voids) {
-            super.onProgressUpdate();
-           // progressDialog.dismiss();
-        }
-    }//Fin AsynTack
 
 }
