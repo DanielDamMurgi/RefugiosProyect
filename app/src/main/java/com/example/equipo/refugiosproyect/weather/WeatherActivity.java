@@ -52,6 +52,7 @@ public class WeatherActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(getResources().getString(R.string.clima));
 
         //PERMISOS
         Dexter.withActivity(this)
@@ -100,8 +101,8 @@ public class WeatherActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         AdapterWeather adapterWeather = new AdapterWeather(getSupportFragmentManager());
-        adapterWeather.addFragment(HoyWeatherFragment.getInstancia(), "Hoy");
-        adapterWeather.addFragment(ForecastFragment.getInstancia(),"5 DAYS");
+        adapterWeather.addFragment(HoyWeatherFragment.getInstancia(), getResources().getString(R.string.hoy));
+        adapterWeather.addFragment(ForecastFragment.getInstancia(),getResources().getString(R.string.cinco_dias));
         viewPager.setAdapter(adapterWeather);
     }
 

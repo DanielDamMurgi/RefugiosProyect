@@ -120,12 +120,12 @@ public class HoyWeatherFragment extends Fragment {
 
                         if (nombre.length() <= 0){
                             txt_nombreSierra.setText(weatherResult.getName());
-                            txt_descripcion.setText(new StringBuilder("Weather in ")
+                            txt_descripcion.setText(new StringBuilder(getResources().getString(R.string.clima_en)+" ")
                                     .append(weatherResult.getName()).toString());
                             txt_geo_coord.setText(new StringBuilder("").append(weatherResult.getCoord().toString()).append("").toString());
                         }else{
                             txt_nombreSierra.setText(nombre);
-                            txt_descripcion.setText(new StringBuilder("Weather in ")
+                            txt_descripcion.setText(new StringBuilder(getResources().getString(R.string.clima_en)+" ")
                                     .append(nombre));
                             txt_geo_coord.setText(new StringBuilder("[").append(lat).append(',').append(lon).append(']').toString());
                         }
@@ -141,12 +141,12 @@ public class HoyWeatherFragment extends Fragment {
                         txt_sunset.setText(Common.convertUnixToHour(weatherResult.getSys().getSunset()));
                         txt_geo_coord.setText(new StringBuilder("").append(weatherResult.getCoord().toString()).append("").toString());
                         txt_wind.setText(
-                                new StringBuilder("Speed: ").append(String.valueOf(weatherResult.getWind().getSpeed())).append(" Deg: ").append(weatherResult.getWind().getDeg()).toString());
+                                new StringBuilder(getResources().getString(R.string.velocidad)+": ").
+                                        append(String.valueOf(weatherResult.getWind().getSpeed())).append(" Deg: ").append(weatherResult.getWind().getDeg()).toString());
 
                         //Display panel
                         weather_panel.setVisibility(View.VISIBLE);
                         loading_weather.setVisibility(View.GONE);
-
 
                     }
                 }, new Consumer<Throwable>() {

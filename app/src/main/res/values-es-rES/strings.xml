@@ -40,4 +40,15 @@
     <string name="cargando_refugios">Cargando refugios</string>
     <string name="cargando_sierras">Cargando sierras</string>
     <string name="credenciales_incorrectas">Credenciales incorrectas</string>
+    <string name="clima_en">Clima en</string>
+    <string name="velocidad">Velocidad</string>
+    <string name="viento">Viento</string>
+    <string name="presion">Presión</string>
+    <string name="humedad">Humedad</string>
+    <string name="amanecer">Amanecer</string>
+    <string name="puesta_sol">Puesta de sol</string>
+    <string name="geo_coords">Coords. geo.</string>
+    <string name="hoy">HOY</string>
+    <string name="cinco_dias">5 DÍAS</string>
+    <string name="clima_cinco_dias">PRONÓSTICO DEL TIEMPO DE 5 DÍAS</string>
 </resources>

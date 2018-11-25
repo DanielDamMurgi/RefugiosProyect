@@ -18,7 +18,8 @@
             android:textColor="@color/caquiOscuro"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:text="5 DAYS WEATHER FORECAST"
+            android:textAlignment="center"
+            android:text="@string/clima_cinco_dias"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
