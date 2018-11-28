@@ -51,4 +51,8 @@
     <string name="hoy">TODAY</string>
     <string name="cinco_dias">5 DAYS</string>
     <string name="clima_cinco_dias">5 DAYS WEATHER FORECAST</string>
+    <string name="desarrollador">Developer</string>
+    <string name="departamento_informatica">Computer department</string>
+    <string name="proyecto_de">Project of</string>
+    <string name="asignatura">" Development of multiplatform applications"</string>
 </resources>
