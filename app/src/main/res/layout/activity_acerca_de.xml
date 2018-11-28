@@ -76,7 +76,7 @@
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/logoIESMurgi"/>
+        android:src="@drawable/logo_murgi"/>
 
 
 
