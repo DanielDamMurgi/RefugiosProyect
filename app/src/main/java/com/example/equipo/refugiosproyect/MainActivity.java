@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
@@ -72,25 +75,27 @@ public class MainActivity extends AppCompatActivity
         btLogin = headerView.findViewById(R.id.bt_login_DL);
         btRegistrar = headerView.findViewById(R.id.bt_registrar_DL);
         tvNombreUsu = headerView.findViewById(R.id.tvNombreUsu);
-
-        ActualizarEstado(LoginActivity.isLogin(), getApplicationContext());
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        cargarpreferencias();
+        cargarPreferencias();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        cargarPreferencias();
     }
 
     @Override
     protected void onStop() {
-        guardarpreferencias();
-
+        guardarPreferencias();
         super.onStop();
     }
 
-    public void guardarpreferencias() {
+    public void guardarPreferencias() {
         SharedPreferences preferences = getSharedPreferences("lista", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean("login",LoginActivity.isLogin());
@@ -103,7 +108,7 @@ public class MainActivity extends AppCompatActivity
         editor.commit();
     }
 
-    public void cargarpreferencias() {
+    public void cargarPreferencias() {
         SharedPreferences preferences = getSharedPreferences("lista", Context.MODE_PRIVATE);
         LoginActivity.setLogin(preferences.getBoolean("login",false));
         if (LoginActivity.isLogin()){
