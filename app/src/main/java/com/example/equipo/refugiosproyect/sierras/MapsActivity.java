@@ -1,6 +1,7 @@
 package com.example.equipo.refugiosproyect.sierras;
 
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -11,7 +12,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.equipo.refugiosproyect.clasesPrincipales.Refugio;
 import com.example.equipo.refugiosproyect.R;
@@ -26,6 +29,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.ui.IconGenerator;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -45,11 +49,13 @@ public class MapsActivity extends FragmentActivity implements
     private Criteria criteria;
     private String proveedor = "";
     private GoogleMap mapa;
-    private LatLng refugio;
+    private LatLng refugio, refugioDes;
     private boolean primera = true;
     private FloatingActionButton floatingActionButton;
     private String lat,lon,nombreSierra;
     private double longitud,latitud;
+    private Marker marker;
+    private IconGenerator iconFactory;
 
     private ArrayList<Refugio> refugios = new ArrayList<>();
 
@@ -61,6 +67,7 @@ public class MapsActivity extends FragmentActivity implements
         setContentView(R.layout.activity_maps);
 
         floatingActionButton = findViewById(R.id.floatingActionButton_montana);
+        iconFactory = new IconGenerator(this);
 
         lat = getIntent().getExtras().getString("latitudSierra");
         latitud = Double.parseDouble(lat);
@@ -184,20 +191,26 @@ public class MapsActivity extends FragmentActivity implements
 
     }
 
-    private void marcadorRefugio(String nombre, String alt, String lon){
-        double altitud = Double.parseDouble(alt);
+    private void marcadorRefugio(String nombre, String lat, String lon){
+        double latitud = Double.parseDouble(lat);
         double longitud = Double.parseDouble(lon);
+        double latitudW = Double.parseDouble(lat);
+        latitudW = latitudW+0.0002;
 
-        refugio = new LatLng(altitud,longitud);
+        refugio = new LatLng(latitud,longitud);
+        refugioDes = new LatLng(latitudW,longitud);
 
-        Marker marker = mapa.addMarker(new MarkerOptions()
-                .position(refugio)
-                .title(nombre)
-                .icon(BitmapDescriptorFactory
-                        .fromResource(android.R.drawable.ic_menu_compass))
+        marker = mapa.addMarker(new MarkerOptions()
+                .position(refugioDes)
+                .icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(nombre)))
                 .anchor(0.5f, 0.5f));
 
-        marker.showInfoWindow();
+//        marker = mapa.addMarker(new MarkerOptions()
+//                .position(refugio)
+//                .icon(BitmapDescriptorFactory
+//                        .fromResource(android.R.drawable.ic_menu_compass))
+//                .anchor(0.5f, 0.5f));
+        //marker.showInfoWindow();
     }
 
     private void añadirMarcadores(Boolean primera) throws IOException, XmlPullParserException {
