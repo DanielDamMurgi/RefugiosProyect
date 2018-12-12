@@ -8,10 +8,6 @@
             android:id="@+id/clima"
             android:icon="@drawable/ic_weather"
             android:title="@string/clima" />
-        <item
-            android:id="@+id/acerca_de"
-            android:icon="@drawable/ic_acerca_de"
-            android:title="@string/acerca_de" />
         <!-- <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
@@ -26,17 +22,17 @@
             android:title="Tools" /> -->
     </group>
 
-    <!-- <item android:title="Communicate">
+     <item android:title="@string/aplicacion">
         <menu>
             <item
                 android:id="@+id/acerca_de"
                 android:icon="@drawable/ic_acerca_de"
                 android:title="@string/acerca_de" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item> -->
+            <!-- <item
+                 android:id="@+id/nav_send"
+                 android:icon="@drawable/ic_menu_send"
+                 android:title="Send" /> -->
+         </menu>
+     </item>
 
 </menu>
