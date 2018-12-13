@@ -10,7 +10,7 @@
 
     <fragment
         android:id="@+id/fragment_sierras"
-        android:name="com.example.equipo.refugiosproyect.MainFragment"
+        android:name="com.refugios.equipo.refugiosproyect.MainFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="8dp"
